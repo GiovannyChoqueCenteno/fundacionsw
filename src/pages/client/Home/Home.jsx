@@ -1,6 +1,6 @@
 import React from 'react'
-import Navbar from '../../components/layout/Navbar'
-import Fundaciones from './Fundaciones'
+import Navbar from '../../../components/templates/Navbar.jsx'
+import Fundaciones from './Fundaciones.jsx'
 const Home = () => {
   return (
     <>
