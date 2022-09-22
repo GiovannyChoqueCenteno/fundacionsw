@@ -1,11 +1,9 @@
-import React from 'react'
+import Router from "./routes/Router.jsx";
+
 
 const App = () => {
   return (
-    <div>
-        Base proyecto Fundacion
-        <button className='btn btn-primary'>Aceptar</button>
-    </div>
+        <Router/>
   )
 }
 
