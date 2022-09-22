@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base{
+    button{
+        @apply px-3 py-1.5 border rounded
+    }
+}
+
+@layer components{
+    .active-link{
+        @apply font-bold text-theme-primary underline
+    }
+    .inactive-link{
+        @apply font-semibold text-theme-primary
+    }
+}
