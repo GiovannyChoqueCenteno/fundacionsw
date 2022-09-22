@@ -1,35 +1,35 @@
+import {routes} from "./constants.js";
+
 export const menuOptionsToClient=[
     {
-        path:'/',
+        path:routes.home,
         title:'Inicio'
     },
     {
-        path:'/categories',
+        path:routes.categories,
         title:'Categorias'
     },
     {
-        path:'/departments',
+        path:routes.departments,
         title:'Departamentos'
     },
     {
-        path:'/register-foundation',
+        path:routes.registerFoundation,
         title:'Registrar fundación'
     }
 ]
 
 export const menuOptionsToAdmin=[
     {
-        path:'/applications',
+        path:routes.adminApplications,
         title:'Solicitudes'
     },
     {
-        path:'/categories',
+        path:routes.adminCategories,
         title:'Categorias'
     },
     {
-        path:'/departments',
+        path:routes.adminDepartments,
         title:'Departamentos'
     },
-]
-
-export const dummyImage='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXJ6BhxOYzhnHeCsIhART7banl41jJg2dtEMNh9dzshgXGbTfvLli2-mplON7MKsD1F8c&usqp=CAU';
+];

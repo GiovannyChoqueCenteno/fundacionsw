@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from "../elements/Header.jsx";
 import {Outlet, useLocation, useNavigate} from "react-router-dom";
+import {routes} from "../../utils/constants.js";
 
 function AuthLayout(props) {
     const location = useLocation();
@@ -8,16 +9,16 @@ function AuthLayout(props) {
 
     const path=location.pathname;
 
-    function handleClick(newPath){
+    async function authActionHandler(newPath) {
         navigate(newPath);
     }
 
     function authAction() {
         if (path==='/signin'){
-            return <button onClick={()=>handleClick('/signup')} type={'button'}>{'Unirse'}</button>
+            return <button onClick={()=>authActionHandler(routes.signUp)} type={'button'}>{'Unirse'}</button>
         }
         if (path==='/signup') {
-            return <button onClick={()=>handleClick('/signin')} type={'button'}>{'Iniciar sesión'}</button>
+            return <button onClick={()=>authActionHandler(routes.signIn)} type={'button'}>{'Iniciar sesión'}</button>
         }
     }
 

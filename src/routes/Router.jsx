@@ -20,7 +20,7 @@ function Router(props) {
                     <Route index path='/' element={<Home/>}/>
                     <Route path="*" element={<Navigate to="/"/>}/>
                 </Route>
-                <Route element={<AuthLayout/>}> {/* if you implement a component please change the components in the routes*/}
+                <Route element={<AuthLayout/>}>
                     <Route index path='/signin' element={<SignIn/>}/>
                     <Route index path='/signup' element={<SignUp/>}/>
                 </Route>
