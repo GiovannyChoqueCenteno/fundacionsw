@@ -6,6 +6,14 @@
     button{
         @apply px-3 py-1.5 border rounded
     }
+
+    label{
+        @apply text-sm text-theme-primary font-semibold
+    }
+
+    input{
+        @apply block border p-2 rounded-md w-full outline-theme-secondary
+    }
 }
 
 @layer components{
@@ -14,5 +22,9 @@
     }
     .inactive-link{
         @apply font-semibold text-theme-primary
+    }
+
+    .btn-prim{
+        @apply bg-theme-primary text-white shadow rounded-md hover:bg-theme-secondary hover:shadow-xl font-semibold
     }
 }

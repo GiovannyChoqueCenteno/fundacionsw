@@ -14,9 +14,9 @@ function AuthLayout(props) {
 
     function authAction() {
         if (path==='/signin'){
-            return <button onClick={()=>handleClick('/signout')} type={'button'}>{'Unirse'}</button>
+            return <button onClick={()=>handleClick('/signup')} type={'button'}>{'Unirse'}</button>
         }
-        if (path==='/signout') {
+        if (path==='/signup') {
             return <button onClick={()=>handleClick('/signin')} type={'button'}>{'Iniciar sesión'}</button>
         }
     }
@@ -24,7 +24,7 @@ function AuthLayout(props) {
     return (
         <>
             <Header menuItems={[]} authAction={authAction()}/>
-            <main>
+            <main className={'flex grow'}>
                 <Outlet/>
             </main>
         </>

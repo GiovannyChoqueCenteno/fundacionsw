@@ -16,7 +16,7 @@ function AppLayout(props) {
             <Header menuItems={menuOptionsToClient} authAction={authAction()}>
 
             </Header>
-            <main>
+            <main className={'flex grow'}>
                 <Outlet/>
             </main>
         </>
