@@ -5,6 +5,7 @@ import AppLayout from "../components/templates/AppLayout.jsx";
 import AuthLayout from "../components/templates/AuthLayout.jsx";
 import AdminLayout from "../components/templates/AdminLayout.jsx";
 import SignUp from "../pages/auth/SignUp.jsx";
+import SignIn from "../pages/auth/SignIn.jsx";
 
 function Router(props) {
     return (
@@ -20,7 +21,7 @@ function Router(props) {
                     <Route path="*" element={<Navigate to="/"/>}/>
                 </Route>
                 <Route element={<AuthLayout/>}> {/* if you implement a component please change the components in the routes*/}
-                    <Route index path='/signin' element={<Home/>}/>
+                    <Route index path='/signin' element={<SignIn/>}/>
                     <Route index path='/signup' element={<SignUp/>}/>
                 </Route>
             </Routes>
