@@ -16,7 +16,7 @@ function AdminLayout(props) {
             <Header menuItems={menuOptionsToAdmin} authAction={authAction()}>
 
             </Header>
-            <main>
+            <main className={'flex grow'}>
                 <Outlet/>
             </main>
         </>
