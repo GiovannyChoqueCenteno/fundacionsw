@@ -28,6 +28,10 @@
         @apply bg-theme-primary text-white shadow rounded-md hover:bg-theme-secondary hover:shadow-xl font-semibold
     }
 
+    .btn-dang{
+        @apply bg-theme-danger text-white shadow rounded-md hover:opacity-90 hover:shadow-xl font-semibold
+    }
+
     .error{
         @apply text-red-500 text-sm
     }

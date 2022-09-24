@@ -1,6 +1,8 @@
 import React from 'react';
-import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Home from "../pages/client/Home/index.jsx";
+import Categoria from '../pages/admin/Categoria/index.jsx';
+
 import AppLayout from "../components/templates/AppLayout.jsx";
 import AuthLayout from "../components/templates/AuthLayout.jsx";
 import AdminLayout from "../components/templates/AdminLayout.jsx";
@@ -12,17 +14,18 @@ function Router(props) {
         <BrowserRouter>
             <Routes>
 
-                <Route path={'admin'} element={<AdminLayout/>}>
-                    <Route path='applications' element={<Home/>}/>
+                <Route path={'admin'} element={<AdminLayout />}>
+                    <Route path='applications' element={<Home />} />
+                    <Route path='categories' element={<Categoria />} />
                 </Route>
 
-                <Route element={<AppLayout/>}>
-                    <Route index path='/' element={<Home/>}/>
-                    <Route path="*" element={<Navigate to="/"/>}/>
+                <Route element={<AppLayout />}>
+                    <Route index path='/' element={<Home />} />
+                    <Route path="*" element={<Navigate to="/" />} />
                 </Route>
-                <Route element={<AuthLayout/>}>
-                    <Route index path='/signin' element={<SignIn/>}/>
-                    <Route index path='/signup' element={<SignUp/>}/>
+                <Route element={<AuthLayout />}>
+                    <Route index path='/signin' element={<SignIn />} />
+                    <Route index path='/signup' element={<SignUp />} />
                 </Route>
             </Routes>
         </BrowserRouter>
