@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {dummyImage} from "../../utils/menu.js";
+import {dummyImage} from "../../utils/constants.js";
 import {uploadImageProfile} from "../../services/storage.js";
 import {createAccount} from "../../services/auth.js";
 import {saveUser} from "../../services/firestore.js";

@@ -1,13 +1,21 @@
 import React from 'react';
 import Header from "../elements/Header.jsx";
-import {Outlet} from "react-router-dom";
+import {Outlet, useNavigate} from "react-router-dom";
 import {menuOptionsToClient} from "../../utils/menu.js";
+import {routes} from "../../utils/constants.js";
+import {closeSession} from "../../services/auth.js";
 
 function AppLayout(props) {
+    const navigate = useNavigate();
+
+    async function authActionHandler() {
+        await closeSession();
+        navigate(routes.signIn);
+    }
 
     function authAction() {
         return (
-            <button>{'Cerrar sesión'}</button>
+            <button onClick={authActionHandler}>{'Cerrar sesión'}</button>
         )
     }
 
