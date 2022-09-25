@@ -1,0 +1,34 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base{
+    button{
+        @apply px-3 py-1.5 border rounded
+    }
+
+    label{
+        @apply text-sm text-theme-primary font-semibold
+    }
+
+    input{
+        @apply block border p-2 rounded-md w-full outline-theme-secondary
+    }
+}
+
+@layer components{
+    .active-link{
+        @apply font-bold text-theme-primary underline
+    }
+    .inactive-link{
+        @apply font-semibold text-theme-primary
+    }
+
+    .btn-prim{
+        @apply bg-theme-primary text-white shadow rounded-md hover:bg-theme-secondary hover:shadow-xl font-semibold
+    }
+
+    .error{
+        @apply text-red-500 text-sm
+    }
+}
