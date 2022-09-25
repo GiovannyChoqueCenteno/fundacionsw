@@ -17,9 +17,11 @@
 }
 
 @layer components{
+    
     .active-link{
         @apply font-bold text-theme-primary underline
     }
+
     .inactive-link{
         @apply font-semibold text-theme-primary
     }
@@ -30,6 +32,10 @@
 
     .btn-dang{
         @apply bg-theme-danger text-white shadow rounded-md hover:opacity-90 hover:shadow-xl font-semibold
+    }
+
+    .btn-custom{
+        @apply px-3 py-1.5 border rounded
     }
 
     .error{

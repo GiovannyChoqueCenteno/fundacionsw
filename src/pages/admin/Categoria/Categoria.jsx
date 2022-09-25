@@ -1,4 +1,5 @@
 import React from 'react'
+import Modal from '../../../components/elements/Modal'
 import { remove } from '../../../utils/messages'
 
 const Categoria = () => {
@@ -6,62 +7,24 @@ const Categoria = () => {
   return (
     <div className={'grow flex justify-center items-start pt-5'}>
 
-      <input type="checkbox" id="modalAgregar" className="modal-toggle" />
-      <div className="modal">
-        <div className="modal-box">
-          <div>
-            <form>
-              <div>
-                <label className={"block text-start"} htmlFor="nombre">nombre</label>
-                <input name='nombre' type="text" placeholder="nombre" className="input w-full border-gray-200 my-1" />
-              </div>
-            </form>
-          </div>
-          <div className="modal-action">
-            <label onClick={null} htmlFor="modalAgregar" className="btn border-0 btn-prim">save</label>
-            <label htmlFor="modalAgregar" className="btn border-0 btn-dang">close</label>
-          </div>
-        </div>
-      </div>
-
-      <input type="checkbox" id="modalEditar" className="modal-toggle" />
-      <div className="modal">
-        <div className="modal-box">
-          <div>
-            <form>
-              <div>
-                <label className={"block text-start"} htmlFor="nombre">nombre</label>
-                <input name='nombre' type="text" placeholder="nombre" className="input w-full border-gray-200 my-1" />
-              </div>
-            </form>
-          </div>
-          <div className="modal-action">
-            <label onClick={null} htmlFor="modalEditar" className="btn border-0 btn-prim">update</label>
-            <label htmlFor="modalEditar" className="btn border-0 btn-dang">close</label>
-          </div>
-        </div>
-      </div>
-
-      <input type="checkbox" id="modalEliminar" className="modal-toggle" />
-      <div className="modal">
-        <div className="modal-box">
-          <div>
-            <h1>{remove}</h1>
-          </div>
-          <div className="modal-action">
-            <label onClick={null} htmlFor="modalEliminar" className="btn border-0 btn-prim">yes</label>
-            <label htmlFor="modalEliminar" className="btn border-0 btn-dang">no</label>
-          </div>
-        </div>
-      </div>
-
       <div className="overflow-x-auto">
 
-        <button className="p-0 my-3">
-          <label className='btn-prim p-2 cursor-pointer rounded-md' htmlFor="modalAgregar">agregar</label>
-        </button>
+        <Modal title={"Crear"} openModalText={"agregar"} modalId={"modalAdd"} btnStyle={"btn-prim"} contentStyle={"my-3"} >
+          <form className='my-5'>
+            <div>
+              <label>Nombre</label>
+              <input type="text" placeholder="name..." className="input input-bordered w-full" />
+            </div>
+            <div className='mt-4'>
+              <a href="#" className='btn-custom btn-prim no-underline'>
+                crear
+              </a>
+            </div>
+          </form>
+        </Modal>
 
         <table className="table table-zebra w-full text-center">
+
           <thead>
             <tr>
               <th className={"bg-theme-primary text-white"}>Nombre</th>
@@ -69,33 +32,47 @@ const Categoria = () => {
               <th className={"bg-theme-primary text-white"}>Eliminar</th>
             </tr>
           </thead>
+
           <tbody>
+
             <tr>
-              <td>Tax Accountant</td>
               <td>
-                <button className="p-0">
-                  <label onClick={null} className='btn-prim p-2 cursor-pointer' htmlFor="modalEditar">editar</label>
-                </button>
+                title
               </td>
               <td>
-                <button className="p-0">
-                  <label onClick={null} className='btn-dang p-2 cursor-pointer' htmlFor="modalEliminar">eliminar</label>
-                </button>
+                <Modal title={"Editar"} openModalText={"editar"} modalId={"modalEdit"} btnStyle={"btn-prim"}>
+                  <form className='my-5'>
+                    <div>
+                      <label>Nombre</label>
+                      <input type="text" placeholder="name..." className="input input-bordered w-full" />
+                    </div>
+                    <div className='mt-4'>
+                      <a href="#" className='btn-custom btn-prim no-underline'>
+                        actualizar
+                      </a>
+                    </div>
+                  </form>
+                </Modal>
+              </td>
+              <td>
+                <Modal title={"Eliminar"} openModalText={"eliminar"} modalId={"modalDelete"} btnStyle={"btn-dang"}>
+                  <div className='mt-4'>
+                    <div className={"my-4"}>
+                      <h3>{remove}</h3>
+                    </div>
+                    <div>
+                      <a href="#" className='btn-custom btn-prim no-underline'>
+                        confirmar
+                      </a>
+                      <a href="#" className='btn-custom btn-dang no-underline ml-2'>
+                        cerrar
+                      </a>
+                    </div>
+                  </div>
+                </Modal>
               </td>
             </tr>
-            <tr>
-              <td>Tax Accountant2</td>
-              <td>
-                <button className="p-0">
-                  <label onClick={null} className='btn-prim p-2 cursor-pointer' htmlFor="modalEditar">editar</label>
-                </button>
-              </td>
-              <td>
-                <button className="p-0">
-                  <label onClick={null} className='btn-dang p-2 cursor-pointer' htmlFor="modalEliminar">eliminar</label>
-                </button>
-              </td>
-            </tr>
+
           </tbody>
         </table>
 
