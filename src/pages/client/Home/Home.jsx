@@ -1,5 +1,5 @@
 import React from 'react'
-import Fundaciones from './Fundaciones.jsx'
+import Fundaciones from './Foundations.jsx'
 const Home = () => {
   return (
     <div className='grow flex justify-center items-center'>
