@@ -5,10 +5,12 @@ import AppLayout from "../components/templates/AppLayout.jsx";
 import AuthLayout from "../components/templates/AuthLayout.jsx";
 import AdminLayout from "../components/templates/AdminLayout.jsx";
 
-import DetallesFundacion from '../pages/client/Fundaciones/DetallesFundacion.jsx';
+import DetallesFundacion from '../pages/client/foundations/DetailsFoundation';
 
 import SignUp from "../pages/auth/SignUp.jsx";
 import SignIn from "../pages/auth/SignIn.jsx";
+import RequestFoundation from '../pages/client/foundations/RequestFoundation';
+import { ProtectedRoute } from './PrivateRoute.jsx';
 
 
 function Router(props) {
@@ -16,7 +18,12 @@ function Router(props) {
         <BrowserRouter>
             <Routes>
 
-                <Route path={'admin'} element={<AdminLayout/>}>
+                <Route path={'admin'} element={
+                <ProtectedRoute>
+                  <Routes>
+                    <Route  path='/'  element={<AdminLayout/>} />  
+                  </Routes>
+                </ProtectedRoute> }>
                     <Route path='applications' element={<Home/>}/>
                 </Route>
 
@@ -24,6 +31,7 @@ function Router(props) {
                     <Route index path='/' element={<Home/>}/>
                     <Route path='/fundacion/:id' element={<DetallesFundacion />} />
                     <Route path="*" element={<Navigate to="/"/>}/>
+                    <Route path='/fundacion/solicitud' element={<RequestFoundation />} />
                 </Route>
                 <Route element={<AuthLayout/>}>
                     <Route index path='/signin' element={<SignIn/>}/>

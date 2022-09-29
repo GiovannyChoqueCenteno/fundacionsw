@@ -1,6 +1,6 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
-import { fundaciones } from '../../../utils/constants';
+import { fundaciones } from '../../../utils/mocks/fundacion'
 
 const DetallesFundacion = () => {
     const data = useParams();
