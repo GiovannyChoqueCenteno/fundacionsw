@@ -1,8 +1,6 @@
 import React from 'react'
 
 const Fundaciones = () => {
-    
-
     return (
         <div className='container mx-auto grid grid-cols-3 gap-10 mt-8'>
             <div className="card w-96 bg-base-100 shadow-xl">

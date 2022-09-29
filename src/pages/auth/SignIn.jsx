@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { signIn } from "../../services/auth.js";
 import { ops } from "../../utils/messages.js";
 import jwt_decode from "jwt-decode";
+import { routes } from '../../utils/constants.js';
 
 function SignIn(props) {
     const navigate = useNavigate();
@@ -14,7 +15,7 @@ function SignIn(props) {
 
     useEffect(() => {
         google.accounts.id.initialize({
-            client_id: "266177157513-0cnvjci5a8q5h2i42ptkjpcuaavfgij8.apps.googleusercontent.com",
+            client_id: "266177157513-ecmdle9q8ka666bvd11au5js3autvto2.apps.googleusercontent.com",
             callback: handleCallbackResponse,
         })
 
@@ -30,10 +31,11 @@ function SignIn(props) {
         var userObject = jwt_decode(response.credential)
         console.log(userObject)
         sessionStorage.setItem("auth", JSON.stringify({
+            "tokenJWT":response.credential,
             "userData":userObject,
             "authType":"Google",
         }));
-        userObject != null ? navigate('/') : navigate('/signin');
+        userObject != null ? navigate(routes.home) : navigate(routes.signIn);
     }
 
     function handleSignOut(event) {
