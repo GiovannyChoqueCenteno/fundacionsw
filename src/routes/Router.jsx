@@ -9,7 +9,8 @@ import DetallesFundacion from '../pages/client/foundations/DetailsFoundation';
 
 import SignUp from "../pages/auth/SignUp.jsx";
 import SignIn from "../pages/auth/SignIn.jsx";
-import RequestFoundation from '../pages/client/foundations/RequestFoundation';
+import RequestFoundations from '../pages/admin/foundations/RequestFoundations';
+import RequestFoundation from '../pages/client/foundations/RequestFoundation'
 import { ProtectedRoute } from './PrivateRoute.jsx';
 
 
@@ -18,15 +19,16 @@ function Router(props) {
         <BrowserRouter>
             <Routes>
 
-                <Route path={'admin'} element={
+                  <Route path={'admin/*'} element={
                 <ProtectedRoute>
-                  <Routes>
-                    <Route  path='/'  element={<AdminLayout/>} />  
-                  </Routes>
-                </ProtectedRoute> }>
-                    <Route path='applications' element={<Home/>}/>
-                </Route>
+                <AdminLayout />
+                </ProtectedRoute>
 
+                }>
+                    <Route  path=''  element={<Home/>} />  
+                    <Route path='applications' element={<Home/>}/>
+                    <Route path='solicitud'  element={<RequestFoundations />}/>
+                </Route>
                 <Route element={<AppLayout/>}>
                     <Route index path='/' element={<Home/>}/>
                     <Route path='/fundacion/:id' element={<DetallesFundacion />} />

@@ -1,13 +1,16 @@
 import React from 'react'
-import { useParams } from 'react-router-dom'
+import DetailsFoundation from '../../client/foundations/DetailsFoundation'
 import { fundaciones } from '../../../utils/mocks/fundacion'
 
-const DetailsFoundation = () => {
-    const data = useParams();
+const ConfirmFoundation = () => {
     const fundacion = fundaciones[0];
+
     return (
-        <div className='container mx-auto  mt-5'>
-            <div className='flex flex-col gap-4 items-center'>
+    <div>
+    <input type="checkbox" id="my-modal" className="modal-toggle" />
+    <div className="modal ">
+      <div className="modal-box">
+      <div className='flex flex-col gap-4 items-center'>
                 <div>
                     <h1 className='text-secondary text-4xl'>{fundacion.nombre}</h1>
                 </div>
@@ -37,11 +40,16 @@ const DetailsFoundation = () => {
                     </div>
                 </div>
                 <a className='link-neutral hover:text-primary' href={fundacion.urlIUbicacion} target="_blank">Ver ubicacion</a>
-                {fundacion.estado==1 ? <a className='btn btn-primary'>Aceptar Solicitud</a> :<a className='btn btn-primary'> Realizar Donacion</a>}
 
             </div>
+        <div className="modal-action">
+          <label htmlFor="my-modal" className="btn">Aceptar</label>
         </div>
-    )
+      </div>
+    </div>
+    </div>
+
+  )
 }
 
-export default DetailsFoundation
+export default ConfirmFoundation

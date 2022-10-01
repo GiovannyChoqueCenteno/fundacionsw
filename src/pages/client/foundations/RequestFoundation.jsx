@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
-import { collection, addDoc, Timestamp } from 'firebase/firestore'
 
 import useForm from '../../../hooks/useForm'
 import { dummyImage } from '../../../utils/constants'
-import { firestore } from '../../../config/firebase'
 import { uploadImageProfile } from '../../../services/storage'
+import { saveRequest } from '../../../services/requestFoundation'
 const RequestFountaion = () => {
     const [image, setImage] = useState(dummyImage)
     const [file, setFile] = useState(null)
@@ -21,15 +20,7 @@ const RequestFountaion = () => {
         e.preventDefault();
         let url = await uploadImageProfile(file);
         console.log(form)
-        try {
-            await addDoc(collection(firestore, 'solicitud'), {
-                ...form,
-                urlImagen : url
-
-            })
-        } catch (error) {
-            alert(error)
-        }
+        saveRequest({...form , url , estado : 1})
     }
     const imageHandler = (event) => {
         if (event.target.files.length > 0) {
