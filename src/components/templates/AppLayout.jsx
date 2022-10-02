@@ -10,6 +10,7 @@ function AppLayout(props) {
 
     async function authActionHandler() {
         await closeSession();
+        sessionStorage.removeItem("auth");
         navigate(routes.signIn);
     }
 

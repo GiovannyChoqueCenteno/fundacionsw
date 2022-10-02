@@ -7,7 +7,6 @@ const Home = () => {
         <Fundaciones />
       </div>
     </div>
-
   )
 }
 

@@ -1,0 +1,14 @@
+export const categorias = [
+    {
+        id: 1,
+        nombre: 'categoria 1',
+    },
+    {
+        id: 2,
+        nombre: 'categoria 2',
+    },
+    {
+        id: 3,
+        nombre: 'categoria 3',
+    },
+]
