@@ -28,6 +28,7 @@ function Router(props) {
                     <Route  path=''  element={<Home/>} />  
                     <Route path='applications' element={<Home/>}/>
                     <Route path='solicitud'  element={<RequestFoundations />}/>
+
                 </Route>
                 <Route element={<AppLayout/>}>
                     <Route index path='/' element={<Home/>}/>

@@ -69,7 +69,7 @@ const RequestFountaion = () => {
                 <div className='flex gap-4'>
                     <div className='flex flex-col flex-1'>
                         <label htmlFor="">Seleccionar Departamento</label>
-                        <select value={form.idCategoria} name="idCategoria" id="" onChange={handleChange}>
+                        <select  value={form.idCategoria} name="idCategoria" id="" onChange={handleChange}>
                             <option value={0} defaultValue disabled>Seleccionar Categoria </option>
                             <option value={1}  >Categoria 1 </option>
 
