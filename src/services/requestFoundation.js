@@ -1,4 +1,3 @@
-import { async } from "@firebase/util"
 import { addDoc,collection, onSnapshot ,query, orderBy, doc, getDoc, setDoc, getDocs, where} from "firebase/firestore"
 
 import { firestore } from "../config/firebase"
@@ -32,7 +31,7 @@ const getRequests = async()=>{
                console.log(doc.id);
                 data.push({
                     ...doc.data(),
-                    _id :doc.id
+                    id :doc.id
                 })
             })
          }
@@ -56,6 +55,9 @@ const acceptRequest = async(id , data)=>{
     } , {
         merge : true
     })
+    // delete data.estado
+    // const urlImagen  = data.url
+    // delete data.url
     try {
         await addDoc(collection(firestore, 'fundacion'), data)
     } catch (error) {
@@ -63,4 +65,15 @@ const acceptRequest = async(id , data)=>{
     }
 }
 
-export {saveRequest , getRequests , getRequest , acceptRequest}
+const rejectRequest = async(id )=>{
+    const docRef = doc(firestore, "solicitud", id);
+    await setDoc(docRef,{
+        estado : 3
+    } , {
+        merge : true
+    })
+   
+   
+}
+
+export {saveRequest , getRequests , getRequest , acceptRequest , rejectRequest}

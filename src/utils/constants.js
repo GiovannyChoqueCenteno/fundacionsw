@@ -4,8 +4,8 @@ export const routes = {
     home: '/',
     categories: '/categories',
     departments: '/departments',
-    registerFoundation: '/register-foundation',
-    adminApplications: '/admin/applications',
+    registerFoundation: '/fundacion/solicitud',
+    adminRequests : '/admin/solicitudes',
     adminCategories: '/admin/categories',
     adminDepartments: '/admin/departments',
 }

@@ -11,7 +11,6 @@ const RequestFoundations = () => {
   },[])
   const getRequestFoundations = async()=>{
     const request = await getRequests();
-    console.log(request)
     setRequestFoundations(request)
   }
   return (
@@ -35,7 +34,7 @@ const RequestFoundations = () => {
           <td>{requestFoundation.nombre}</td>
           <td>{requestFoundation.correo}</td>
           <td>{requestFoundation.telefono}</td>
-          <td > <Link className='btn btn-primary' to={`/fundacion/${requestFoundation._id}`}>
+          <td > <Link className='btn btn-primary' to={`/admin/solicitud/${requestFoundation.id}`}>
              Ver Solicitud 
              </Link>
              </td>

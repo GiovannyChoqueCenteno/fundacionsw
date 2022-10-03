@@ -2,9 +2,9 @@ import React from 'react'
 import { useEffect , useState } from 'react';
 import { useParams , useNavigate} from 'react-router-dom'
 import { getFoundation } from '../../../services/foundation';
-import { acceptRequest, getRequest } from '../../../services/requestFoundation';
+import { acceptRequest, getRequest, rejectRequest } from '../../../services/requestFoundation';
 
-const DetailsFoundation = () => {
+const DetailsRequest = () => {
     const {id} = useParams();
     const [fundacion, setFundacion] = useState(null)
     useEffect(()=>{
@@ -13,11 +13,17 @@ const DetailsFoundation = () => {
     ,[])
     const navigate = useNavigate();
     const obtenerFundacion =async()=>{
-        const getFundacion  = await getFoundation(id)
+        const getFundacion  = await getRequest(id)
         setFundacion(getFundacion)
     }
-    const acceptFundation = async()=>{
+    const acceptFoundation = async()=>{
         await acceptRequest(id,fundacion);
+        navigate('/admin/solicitudes' ,{
+            replace : true
+        })
+    }
+    const rejectFoundation = async()=>{
+        await rejectRequest(id,fundacion);
         navigate('/admin/solicitudes' ,{
             replace : true
         })
@@ -55,7 +61,17 @@ const DetailsFoundation = () => {
             </div>
 
             <a className='link-neutral hover:text-primary' href={fundacion.urlIUbicacion} target="_blank">Ver ubicacion</a>
-           <a className='btn btn-primary'> Realizar Donacion</a>
+            <div className='flex justify-between w-1/4'>
+                <div>
+                <a className='btn btn-primary' onClick={acceptFoundation}>Aceptar Solicitud</a>
+
+                </div>
+            <div>
+            <a className='btn btn-error' onClick={rejectFoundation}>Rechazar Solicitud</a>
+
+            </div>
+
+            </div>
 
         </div>
     </div>
@@ -64,4 +80,4 @@ const DetailsFoundation = () => {
             
 }
 
-export default DetailsFoundation
+export default DetailsRequest

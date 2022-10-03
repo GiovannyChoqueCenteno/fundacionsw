@@ -16,24 +16,26 @@ import Department from '../pages/admin/departments/index.jsx';
 
 
 import { ProtectedRoute } from './PrivateRoute.jsx';
+import DetailsRequest from '../pages/admin/foundations/DetailsRequest.jsx';
 
 
 function Router(props) {
     return (
         <BrowserRouter>
             <Routes>
-                <Route element={<AppLayout/>}>
-                    <Route index path='/' element={<Home/>}/>
+                <Route element={<AppLayout />}>
+                    <Route index path='/' element={<Home />} />
                 </Route>
-                <Route path={'admin'} element={
-                    <ProtectedRoute>
-                        <Routes>
-                            <Route path='/' element={<AdminLayout />} />
-                        </Routes>
+                <Route path={'admin/*'} element={
+                    <ProtectedRoute
+                     children={<AdminLayout />}
+                    >    
                     </ProtectedRoute>}>
                     <Route path='applications' element={<Home />} />
-                    <Route path='categories' element={<Categoria />} />
-                    <Route path='departments' element={<Department />} />
+                            <Route path='categories' element={<Categoria />} />
+                            <Route path='solicitudes' element={<RequestFoundations />} />
+                            <Route path='departments' element={<Department />} />
+                            <Route path='solicitud/:id' element={<DetailsRequest />} />
                 </Route>
                 <Route element={<AppLayout />}>
                     <Route index path='/' element={<Home />} />

@@ -21,7 +21,7 @@ export const menuOptionsToClient=[
 
 export const menuOptionsToAdmin=[
     {
-        path:routes.adminApplications,
+        path:routes.adminRequests,
         title:'Solicitudes'
     },
     {

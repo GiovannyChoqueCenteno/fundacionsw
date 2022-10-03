@@ -22,7 +22,7 @@ async function getAllCategories(){
     const querySnapshot = await getDocs(collection(firestore, "categories"));
     const list=[];
     querySnapshot.forEach((currentDoc) => {
-        document={
+        const document={
             id: currentDoc.id,
             ...currentDoc.data()
         }

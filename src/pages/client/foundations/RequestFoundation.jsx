@@ -4,6 +4,8 @@ import useForm from '../../../hooks/useForm'
 import { dummyImage } from '../../../utils/constants'
 import { uploadImageProfile } from '../../../services/storage'
 import { saveRequest } from '../../../services/requestFoundation'
+import { useEffect } from 'react'
+import { getAllCategories } from '../../../services/categories/categoryDB'
 const RequestFountaion = () => {
     const [image, setImage] = useState(dummyImage)
     const [file, setFile] = useState(null)
@@ -16,11 +18,12 @@ const RequestFountaion = () => {
         idCategoria : 0,
         idDepartamento : 0
     });
+    const [categories, setCategories] = useState([])
     const handleSubmit = async (e) => {
         e.preventDefault();
         let url = await uploadImageProfile(file);
         console.log(form)
-        saveRequest({...form , url , estado : 1})
+        saveRequest({...form , urlImagen : url , estado : 1})
     }
     const imageHandler = (event) => {
         if (event.target.files.length > 0) {
@@ -33,6 +36,16 @@ const RequestFountaion = () => {
             }
         }
     }
+    useEffect(()=>{
+        getData()
+    },[])
+
+
+    const getData = async()=>{
+        const categories= await getAllCategories();
+        setCategories(categories)
+    }
+
     return (
         <div className='container mx-auto  mt-5'>
             <h1 className='text-center font-bold text-4xl text-gray-400'>Registrar mi fundacion</h1>
@@ -80,8 +93,9 @@ const RequestFountaion = () => {
 
                         <label htmlFor="">Seleccionar Categoria</label>
                         <select value={form.idDepartamento} onChange={handleChange} name="idDepartamento" id="1">
-                            <option value={0} defaultValue disabled>Seleccionar Departamento </option>
-                            <option value={2}  >Departamento 1 </option>
+                            {categories.map(category =>(
+                                <option value={category.id}>{category.nombre}</option>
+                            ))}
 
                         </select>
                     </div>
