@@ -1,15 +1,19 @@
-import {addDoc, collection, doc, getDoc, getDocs, onSnapshot, query, setDoc} from "firebase/firestore";
-import {firestore} from "../../config/firebase.js";
+import { addDoc, collection, doc, getDoc, getDocs, onSnapshot, query, setDoc, deleteDoc } from "firebase/firestore";
+import { firestore } from "../../config/firebase.js";
 
 async function saveCategory(data) {
     await addDoc(collection(firestore, "categories"), data);
 }
 
-async function updateCategory(id,data) {
-    await setDoc(doc(firestore, "categories"), data);
+async function updateCategory(id, data) {
+    await setDoc(doc(firestore, "categories", id), data);
 }
 
-async function getCategory(id){
+async function deleteCategory(id) {
+    await deleteDoc(doc(firestore, "categories", id));
+}
+
+async function getCategory(id) {
     const docRef = doc(firestore, "categories", id);
     const document = await getDoc(docRef);
     return {
@@ -18,11 +22,14 @@ async function getCategory(id){
     }
 }
 
-async function getAllCategories(){
+async function getAllCategories() {
     const querySnapshot = await getDocs(collection(firestore, "categories"));
-    const list=[];
+    const list = [];
     querySnapshot.forEach((currentDoc) => {
-        const document={
+
+
+        let document = {
+
             id: currentDoc.id,
             ...currentDoc.data()
         }
@@ -36,7 +43,7 @@ async function getAllCategories(){
  * @param setCategories is a hook to change value every time that categories changing
  * @returns a function to unsubscribe to listen categories "unsubscribe()"
  */
-async function listenAllCategories(setCategories){
+async function listenAllCategories(setCategories) {
     const q = query(collection(firestore, "categories"));
     return onSnapshot(q, (querySnapshot) => {
         const list = [];
@@ -58,5 +65,6 @@ export {
     updateCategory,
     getCategory,
     getAllCategories,
-    listenAllCategories
+    listenAllCategories,
+    deleteCategory
 }

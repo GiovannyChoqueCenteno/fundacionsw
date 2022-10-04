@@ -1,6 +1,7 @@
 import { addDoc,collection, onSnapshot ,query, orderBy, doc, getDoc, setDoc, getDocs, where} from "firebase/firestore"
 
 import { firestore } from "../config/firebase"
+import { saveFoundation } from "./foundation"
 
 const saveRequest = async(data)=>{
     try {
@@ -11,6 +12,7 @@ const saveRequest = async(data)=>{
             idCategoria : parseInt(data.idCategoria),
             telefono : parseInt(data.telefono)
         })
+        await saveFoundation(data)
     } catch (error) {
         alert(error)
     }
@@ -55,14 +57,8 @@ const acceptRequest = async(id , data)=>{
     } , {
         merge : true
     })
-    // delete data.estado
-    // const urlImagen  = data.url
-    // delete data.url
-    try {
-        await addDoc(collection(firestore, 'fundacion'), data)
-    } catch (error) {
-        alert(error)
-    }
+    
+  
 }
 
 const rejectRequest = async(id )=>{
