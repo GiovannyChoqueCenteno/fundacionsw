@@ -17,12 +17,7 @@ function Router(props) {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path={'admin'} element={
-                    <ProtectedRoute>
-                        <Routes>
-                            <Route path='/' element={<AdminLayout />} />
-                        </Routes>
-                    </ProtectedRoute>}>
+                <Route path={'admin'} element={<ProtectedRoute children={<AdminLayout />} />}>
                     <Route path='applications' element={<Home />} />
                     <Route path='categories' element={<Categoria />} />
                     <Route path='departments' element={<Department />} />
@@ -38,7 +33,7 @@ function Router(props) {
                     <Route index path='/signup' element={<SignUp />} />
                 </Route>
             </Routes>
-        </BrowserRouter>
+        </BrowserRouter >
     );
 }
 

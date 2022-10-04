@@ -1,21 +1,26 @@
 import { useState } from "react";
 
 
-const useForm = (initialState = {})=>{
+const useForm = (initialState = {}) => {
     const [form, setForm] = useState(initialState);
 
-    const handleChange = (e)=>{
+    const handleChange = (e) => {
         setForm(form => (
             {
                 ...form,
-                [e.target.name] : e.target.value
+                [e.target.name]: e.target.value
             }
-        ) )
+        ))
+    }
+
+    const clear = () => {
+        setForm(initialState);
     }
 
     return {
-        form ,
-        handleChange
+        form,
+        handleChange,
+        clear
     }
 }
 
