@@ -16,7 +16,11 @@ import Department from '../pages/admin/departments/index.jsx';
 
 
 import { ProtectedRoute } from './PrivateRoute.jsx';
+
 import DetailsRequest from '../pages/admin/foundations/DetailsRequest.jsx';
+
+import Bills from '../pages/admin/bills';
+
 
 
 function Router(props) {
@@ -37,6 +41,7 @@ function Router(props) {
                     <Route path='solicitudes' element={<RequestFoundations />} />
                     <Route path='departments' element={<Department />} />
                     <Route path='solicitud/:id' element={<DetailsRequest />} />
+                    <Route path='bills' element={<Bills />} />
                 </Route>
                 <Route element={<AppLayout />}>
                     <Route index path='/' element={<Home />} />
