@@ -21,6 +21,20 @@
         @apply font-bold text-theme-primary underline
     }
 
+    input,.StripeElement {
+        @apply block border p-2 rounded-md w-full outline-theme-secondary
+    }
+
+    .StripeElement.IdealBankElement,
+    .StripeElement.FpxBankElement,
+    .StripeElement.PaymentRequestButton {
+        padding: 0;
+    }
+
+    .StripeElement.PaymentRequestButton {
+        height: 40px;
+    }
+
     .inactive-link {
         @apply font-semibold text-theme-primary
     }
@@ -41,3 +55,4 @@
         @apply text-red-500 text-sm
     }
 }
+

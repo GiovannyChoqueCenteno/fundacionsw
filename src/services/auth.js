@@ -18,8 +18,13 @@ async function closeSession() {
     return await signOut(auth);
 }
 
+function getUser() {
+    return auth.currentUser;
+}
+
 export {
     createAccount,
     signIn,
-    closeSession
+    closeSession,
+    getUser
 }
