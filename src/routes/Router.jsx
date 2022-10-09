@@ -11,6 +11,7 @@ import SignIn from "../pages/auth/SignIn.jsx";
 import Department from '../pages/admin/departments/index.jsx';
 import RequestFoundation from '../pages/client/foundations/RequestFoundation';
 import { ProtectedRoute } from './PrivateRoute.jsx';
+import Bills from '../pages/admin/bills';
 
 
 function Router(props) {
@@ -21,6 +22,7 @@ function Router(props) {
                     <Route path='applications' element={<Home />} />
                     <Route path='categories' element={<Categoria />} />
                     <Route path='departments' element={<Department />} />
+                    <Route path='bills' element={<Bills />} />
                 </Route>
                 <Route element={<AppLayout />}>
                     <Route index path='/' element={<Home />} />
