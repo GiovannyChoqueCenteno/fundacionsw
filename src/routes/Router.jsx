@@ -24,6 +24,7 @@ import AdminHome from '../pages/admin/index.jsx';
 import { ClientRoute } from './ClientRoute.jsx';
 
 import  FoundationsByCategory from '../pages/client/foundations/FoundationsByCategory'
+import FoundationsByDepartament from '../pages/client/foundations/FountdationsByDepartament.jsx';
 
 function Router(props) {
 
@@ -52,11 +53,17 @@ function Router(props) {
                     children={<AppLayout />}
                 />
                 }>
-                    <Route  path='' element={<Home />} />
-                    <Route path='categories' element={<FoundationsByCategory  />}  />
-                    <Route path='fundacion/:id' element={<DetallesFundacion />} />
                     <Route path='fundacion/solicitud' element={<RequestFoundation />} />
                 </Route>
+                <Route path='*' element={
+                    <AppLayout />
+                }>
+                <Route  path='' element={<Home />} />
+                <Route path='categories' element={<FoundationsByCategory  />}  />
+                <Route path='departments'  element={<FoundationsByDepartament  />}  />
+                <Route path='fundacion/:id' element={<DetallesFundacion />} />
+                </Route>
+                  
                 <Route element={<AuthLayout />}>
                     <Route  path='/signin' element={<SignIn />} />
                     <Route  path='/signup' element={<SignUp />} />

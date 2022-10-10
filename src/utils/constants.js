@@ -1,9 +1,9 @@
 export const routes = {
     signIn: '/signin',
     signUp: '/signup',
-    home: '/client',
-    categories: '/client/categories',
-    departments: '/client/departments',
+    home: '/',
+    categories: '/categories',
+    departments: '/departments',
     registerFoundation: '/client/fundacion/solicitud',
     adminRequests : '/admin/solicitudes',
     adminCategories: '/admin/categories',
