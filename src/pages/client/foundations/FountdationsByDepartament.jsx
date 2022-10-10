@@ -1,55 +1,57 @@
 import React from 'react'
-import { useState,useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import  {getAcceptedFoundations} from '../../../services/foundation'
-const FoundationsByDepartament = () => {
-    const [foundations, setFoundations] = useState([])
+import ListFoundations from '../../../components/elements/ListFoundations';
+import { getAcceptedFoundations, getFoundationsByCategory, getFoundationsByDepartment } from '../../../services/foundation'
+import { fundaciones } from '../../../utils/mocks/fundacion'
+import { getAllDeparments } from '../../../services/deparments/deparmentDB'
 
+const FoundationsByCategory = () => {
+        const [foundations, setFoundations] = useState([])
+    const [departments, setDepartments] = useState([])
     const navigate = useNavigate();
 
-    const handleClick = (id_fundacion) => {
-        navigate(`/fundacion/${id_fundacion}`)
-    }
 
-    useEffect(()=>{
+
+    useEffect(() => {
         getFoundations();
-    },[])
+        getDepartments();
+    }, [])
 
-    const getFoundations = async()=>{
-          const res=await getAcceptedFoundations()
+    const getFoundations = async () => {
+        const res = await getAcceptedFoundations()
         setFoundations(res);
-        }
-
+    }
+    const handleChange = async(e) => {
+        console.log(e.target.value)
+        const res = await getFoundationsByDepartment(e.target.value)
+        setFoundations(res);
+   
+    }
+    const getDepartments = async () => {
+        const res = await getAllDeparments();
+        setDepartments(res)
+    }
     return (
         <>
-        <div className='ml-4'>
-        <select className='' name="" id="" >
-        <option value="">Seleccionar departamento</option>
-        <option value="">Categoria 1</option>
-        <option value="">Categoria 2</option>
-        </select>
-        </div>
+            <div>
+                <select className='' name="" id="" onChange={handleChange} >
+                    <option value="">Seleccionar Departamento</option>
+                    {departments.map(department =>(
+                        <option key={department.id} value={department.id}>{department.nombre}</option>
+                    ))}
+                </select>
+            </div>
 
-        <div className='grow flex justify-center items-center'>
-
-        <div className='container mx-auto grid gap-4  grid-cols-1 mt-3 lg:grid-cols-3'>
-        {foundations.map( fundacion =>(
-            <div key={fundacion.id} onClick={()=>handleClick(fundacion.id)} className="card w-full bg-base-100 shadow-xl hover:cursor-pointer hover:translate-y-1 hover:bg-slate-400">
-                <figure><img src={fundacion.urlImagen} alt="Shoes" /></figure>
-                <div className="card-body">
-                    <h2 className="card-title">{fundacion.nombre}</h2>
-                    <p>{fundacion.descripcion}</p>
-                   
+            <div className='grow flex justify-center items-center'>
+                <div className='container mx-auto grid gap-4  grid-cols-1 mt-3 lg:grid-cols-3'>
+                    <ListFoundations foundations={foundations} />
                 </div>
             </div>
-        )
-        )}
-        </div>
-        </div>
         </>
 
     )
 }
 
 
-export default FoundationsByDepartament
+export default FoundationsByCategory

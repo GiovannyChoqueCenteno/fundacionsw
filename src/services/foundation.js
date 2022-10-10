@@ -33,5 +33,42 @@ const saveFoundation = async(data)=>{
         alert(error)
     }
 }
+const getFoundationsByCategory = async(idCategoria)=>{
+    
+    const collectionRef = collection(firestore,'fundacion');
+    const q = query(collectionRef,where('estado','==' ,2),where('idCategoria','==',idCategoria));
+    const docsSnap  = await getDocs(q);
+    const data = []
+    if(docsSnap.docs.length > 0) {
+        docsSnap.forEach(doc => {
+           console.log(doc.data());
+           console.log(doc.id);
+            data.push({
+                ...doc.data(),
+                id :doc.id
+            })
+        })
+     }
+    
+     return data;
+}
 
-export {getAcceptedFoundations , getFoundation , saveFoundation}
+const getFoundationsByDepartment = async(idDepartment)=>{
+    const collectionRef = collection(firestore,'fundacion');
+    const q = query(collectionRef,where('estado','==' ,2),where('idDepartamento','==',idDepartment));
+    const docsSnap  = await getDocs(q);
+    const data = []
+    if(docsSnap.docs.length > 0) {
+        docsSnap.forEach(doc => {
+           console.log(doc.data());
+           console.log(doc.id);
+            data.push({
+                ...doc.data(),
+                id :doc.id
+            })
+        })
+     }
+    
+     return data;
+}
+export {getAcceptedFoundations , getFoundation , saveFoundation , getFoundationsByCategory, getFoundationsByDepartment}
