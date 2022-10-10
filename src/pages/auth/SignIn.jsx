@@ -46,7 +46,7 @@ function SignIn(props) {
         event.preventDefault();
 
         signIn(email, password).then(response => {
-            navigate('/');
+            navigate('/client');
         }).catch(err => {
             setErrorMessage(ops);
         });

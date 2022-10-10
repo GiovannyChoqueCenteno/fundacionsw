@@ -6,6 +6,7 @@ function Menu({items}) {
         <ul className={'flex gap-5'}>
             {
                 items.map((item, index) => {
+                    console.log(item)
                     return <MenuLink key={index} path={item.path} title={item.title}/>
                 })
             }

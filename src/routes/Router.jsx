@@ -20,10 +20,13 @@ import { ProtectedRoute } from './PrivateRoute.jsx';
 import DetailsRequest from '../pages/admin/foundations/DetailsRequest.jsx';
 
 import Bills from '../pages/admin/bills';
+import AdminHome from '../pages/admin/index.jsx';
+import { ClientRoute } from './ClientRoute.jsx';
 
-
+import  FoundationsByCategory from '../pages/client/foundations/FoundationsByCategory'
 
 function Router(props) {
+
     return (
         <BrowserRouter>
             <Routes>
@@ -36,6 +39,7 @@ function Router(props) {
                         children={<AdminLayout />}
                     >
                     </ProtectedRoute>}>
+                    <Route path='' element={<AdminHome />} />
                     <Route path='applications' element={<Home />} />
                     <Route path='categories' element={<Categoria />} />
                     <Route path='solicitudes' element={<RequestFoundations />} />
@@ -43,15 +47,19 @@ function Router(props) {
                     <Route path='solicitud/:id' element={<DetailsRequest />} />
                     <Route path='bills' element={<Bills />} />
                 </Route>
-                <Route element={<AppLayout />}>
-                    <Route index path='/' element={<Home />} />
-                    <Route path='/fundacion/:id' element={<DetallesFundacion />} />
-                    <Route path="*" element={<Navigate to="/" />} />
-                    <Route path='/fundacion/solicitud' element={<RequestFoundation />} />
+                <Route path={'client/*'} element={
+                <ClientRoute
+                    children={<AppLayout />}
+                />
+                }>
+                    <Route  path='' element={<Home />} />
+                    <Route path='categories' element={<FoundationsByCategory  />}  />
+                    <Route path='fundacion/:id' element={<DetallesFundacion />} />
+                    <Route path='fundacion/solicitud' element={<RequestFoundation />} />
                 </Route>
                 <Route element={<AuthLayout />}>
-                    <Route index path='/signin' element={<SignIn />} />
-                    <Route index path='/signup' element={<SignUp />} />
+                    <Route  path='/signin' element={<SignIn />} />
+                    <Route  path='/signup' element={<SignUp />} />
                 </Route>
             </Routes>
         </BrowserRouter >
