@@ -1,7 +1,10 @@
 import React from 'react'
 import { useState,useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import ListFoundations from '../../../components/elements/ListFoundations';
 import  {getAcceptedFoundations} from '../../../services/foundation'
+import {fundaciones} from '../../../utils/mocks/fundacion'
+
 const FoundationsByCategory = () => {
     const [foundations, setFoundations] = useState([])
 
@@ -17,12 +20,12 @@ const FoundationsByCategory = () => {
 
     const getFoundations = async()=>{
           const res=await getAcceptedFoundations()
-        setFoundations(res);
-        }
+            setFoundations(res);
+     }
 
     return (
         <>
-        <div className='ml-4'>
+        <div>
         <select className='' name="" id="" >
         <option value="">Seleccionar Categoria</option>
         <option value="">Categoria 1</option>
@@ -31,19 +34,8 @@ const FoundationsByCategory = () => {
         </div>
 
         <div className='grow flex justify-center items-center'>
-
         <div className='container mx-auto grid gap-4  grid-cols-1 mt-3 lg:grid-cols-3'>
-        {foundations.map( fundacion =>(
-            <div key={fundacion.id} onClick={()=>handleClick(fundacion.id)} className="card w-full bg-base-100 shadow-xl hover:cursor-pointer hover:translate-y-1 hover:bg-slate-400">
-                <figure><img src={fundacion.urlImagen} alt="Shoes" /></figure>
-                <div className="card-body">
-                    <h2 className="card-title">{fundacion.nombre}</h2>
-                    <p>{fundacion.descripcion}</p>
-                   
-                </div>
-            </div>
-        )
-        )}
+        <ListFoundations foundations={foundations} />
         </div>
         </div>
         </>

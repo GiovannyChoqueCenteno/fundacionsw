@@ -61,7 +61,7 @@ function Router(props) {
                 <Route  path='' element={<Home />} />
                 <Route path='categories' element={<FoundationsByCategory  />}  />
                 <Route path='departments'  element={<FoundationsByDepartament  />}  />
-                <Route path='fundacion/:id' element={<DetallesFundacion />} />
+                <Route path='foundation/:id' element={<DetallesFundacion />} />
                 </Route>
                   
                 <Route element={<AuthLayout />}>
