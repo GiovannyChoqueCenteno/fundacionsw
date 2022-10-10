@@ -6,7 +6,8 @@ import {routes} from "../../utils/constants.js";
 import {closeSession} from "../../services/auth.js";
 import { useEffect } from 'react';
 import useAuth from '../../hooks/useAuth.js';
-
+import {getFoundationByUser} from '../../services/foundation'
+ 
 function AppLayout(props) {
     const {user} = useAuth()
     const navigate = useNavigate();
@@ -24,8 +25,7 @@ function AppLayout(props) {
             else
             return <button onClick={()=>navigate('/signin')}>{'Iniciar sesión'}</button>
     }
-    useEffect(()=>{
-    },[])
+   
     return (
         <>
             <Header menuItems={menuOptionsToClient} authAction={authAction()}>

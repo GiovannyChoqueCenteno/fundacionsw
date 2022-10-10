@@ -14,23 +14,20 @@ const FoundationsByCategory = () => {
 
 
     useEffect(() => {
-        getFoundations();
-        getDepartments();
+       getData()
     }, [])
 
-    const getFoundations = async () => {
-        const res = await getAcceptedFoundations()
-        setFoundations(res);
+    const getData =  () => {
+        Promise.all([getAcceptedFoundations(),getAllDeparments()]).then(([foundations,deparments])=>{
+            setDepartments(deparments)
+            setFoundations(foundations);    
+        })
     }
     const handleChange = async(e) => {
         console.log(e.target.value)
         const res = await getFoundationsByDepartment(e.target.value)
         setFoundations(res);
    
-    }
-    const getDepartments = async () => {
-        const res = await getAllDeparments();
-        setDepartments(res)
     }
     return (
         <>

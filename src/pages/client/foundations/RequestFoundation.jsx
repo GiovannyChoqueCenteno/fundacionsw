@@ -6,12 +6,15 @@ import { uploadImageProfile } from '../../../services/storage'
 import { saveRequest } from '../../../services/requestFoundation'
 import { useEffect } from 'react'
 import { getAllCategories } from '../../../services/categories/categoryDB'
+import { getAllDeparments } from '../../../services/deparments/deparmentDB'
+import useAuth from '../../../hooks/useAuth'
+
 const RequestFountaion = () => {
+    const {user} = useAuth();
     const [image, setImage] = useState(dummyImage)
     const [file, setFile] = useState(null)
     const { form, handleChange } = useForm({
         nombre: '',
-        correo: '',
         descripcion: '',
         telefono : 0,
         direccion : '',
@@ -19,11 +22,13 @@ const RequestFountaion = () => {
         idDepartamento : 0
     });
     const [categories, setCategories] = useState([])
+    const [departments, setDepartments] = useState([])
     const handleSubmit = async (e) => {
         e.preventDefault();
         let url = await uploadImageProfile(file);
         console.log(form)
-        saveRequest({...form , urlImagen : url , estado : 1})
+        saveRequest({...form ,correo 
+            : user.email ,urlImagen : url , estado : 1})
     }
     const imageHandler = (event) => {
         if (event.target.files.length > 0) {
@@ -41,9 +46,11 @@ const RequestFountaion = () => {
     },[])
 
 
-    const getData = async()=>{
-        const categories= await getAllCategories();
-        setCategories(categories)
+    const getData = ()=>{
+        Promise.all([getAllCategories(),getAllDeparments()]).then(([categories,departments])=>{
+            setCategories(categories)
+            setDepartments(departments)        
+     })
     }
 
     return (
@@ -67,10 +74,7 @@ const RequestFountaion = () => {
                     <label htmlFor="">Descripcion</label>
                     <input name='descripcion' value={form.descripcion} onChange={handleChange} required type="text" />
                 </div>
-                <div className='form-control mb-3'>
-                    <label htmlFor="">Correo</label>
-                    <input name='correo' value={form.correo} onChange={handleChange} required type="text" />
-                </div>
+          
                 <div className='form-control mb-3'>
                     <label htmlFor="">Telefono</label>
                     <input name='telefono' value={form.telefono} onChange={handleChange} required type="number" />
@@ -83,8 +87,9 @@ const RequestFountaion = () => {
                     <div className='flex flex-col flex-1'>
                         <label htmlFor="">Seleccionar Departamento</label>
                         <select  value={form.idCategoria} name="idCategoria" id="" onChange={handleChange}>
-                            <option value={0} defaultValue disabled>Seleccionar Categoria </option>
-                            <option value={1}  >Categoria 1 </option>
+                            {departments.map(department =>(
+                                <option value={department.id}>{department.nombre}</option>
+                            ))}
 
                         </select>
 

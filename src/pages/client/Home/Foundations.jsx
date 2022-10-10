@@ -4,18 +4,20 @@ import { useNavigate } from 'react-router-dom'
 import ListFoundations from '../../../components/elements/ListFoundations'
 import { getAcceptedFoundations } from '../../../services/foundation'
 import { fundaciones } from '../../../utils/mocks/fundacion'
-
+import {IconBase} from 'react-icons'
+import  {AiOutlineLoading} from 'react-icons/ai'
 
 const Fundaciones = () => {
 
     const [foundations, setFoundations] = useState([])
-
-    const navigate = useNavigate();
+    const [loading, setLoading] = useState(true)
 
 
     useEffect(()=>{
         getFoundations();
     },[])
+
+ 
 
     const getFoundations = async()=>{
           const res=await getAcceptedFoundations()
@@ -24,7 +26,11 @@ const Fundaciones = () => {
      }
 
     return (
-        <ListFoundations  foundations={foundations}/>
+         foundations.length===0?
+             
+             <img src="./loading.gif" className='text-center' />
+            :
+            <ListFoundations  foundations={foundations}/>
     )
 }
 

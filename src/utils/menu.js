@@ -1,5 +1,4 @@
 import {routes} from "./constants.js";
-
 export const menuOptionsToClient=[
     {
         path:routes.home,

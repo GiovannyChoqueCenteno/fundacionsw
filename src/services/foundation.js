@@ -9,8 +9,6 @@ const getAcceptedFoundations =async ()=>{
     const data = []
     if(docsSnap.docs.length > 0) {
         docsSnap.forEach(doc => {
-           console.log(doc.data());
-           console.log(doc.id);
             data.push({
                 ...doc.data(),
                 id :doc.id
@@ -41,8 +39,7 @@ const getFoundationsByCategory = async(idCategoria)=>{
     const data = []
     if(docsSnap.docs.length > 0) {
         docsSnap.forEach(doc => {
-           console.log(doc.data());
-           console.log(doc.id);
+          
             data.push({
                 ...doc.data(),
                 id :doc.id
@@ -60,8 +57,7 @@ const getFoundationsByDepartment = async(idDepartment)=>{
     const data = []
     if(docsSnap.docs.length > 0) {
         docsSnap.forEach(doc => {
-           console.log(doc.data());
-           console.log(doc.id);
+     
             data.push({
                 ...doc.data(),
                 id :doc.id
@@ -71,4 +67,22 @@ const getFoundationsByDepartment = async(idDepartment)=>{
     
      return data;
 }
-export {getAcceptedFoundations , getFoundation , saveFoundation , getFoundationsByCategory, getFoundationsByDepartment}
+
+const getFoundationByUser = async(email)=>{
+    const collectionRef = collection(firestore,'fundacion');
+    const q = query(collectionRef,where('correo','==',email));
+    const docsSnap = await getDocs(q);
+    const data = []
+    if(docsSnap.docs.length > 0) {
+        docsSnap.forEach(doc => {
+     
+            data.push({
+                ...doc.data(),
+                id :doc.id
+            })
+        })
+     }
+     return data[0]
+}
+
+export {getAcceptedFoundations , getFoundation , saveFoundation , getFoundationsByCategory, getFoundationsByDepartment ,getFoundationByUser}

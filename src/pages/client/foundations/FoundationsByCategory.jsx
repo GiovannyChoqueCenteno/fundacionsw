@@ -1,38 +1,28 @@
-import { async } from '@firebase/util';
 import React from 'react'
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import ListFoundations from '../../../components/elements/ListFoundations';
 import { getAcceptedFoundations, getFoundationsByCategory } from '../../../services/foundation'
-import { fundaciones } from '../../../utils/mocks/fundacion'
 import { getAllCategories } from '../../../services/categories/categoryDB'
 
 const FoundationsByCategory = () => {
         const [foundations, setFoundations] = useState([])
     const [categories, setCategories] = useState([])
-    const navigate = useNavigate();
-
 
 
     useEffect(() => {
-        getFoundations();
-        getCategories();
+        getData()
     }, [])
 
-    const getFoundations = async () => {
-        const res = await getAcceptedFoundations()
-        setFoundations(res);
+    const getData = async () => {
+        Promise.all([getAcceptedFoundations(),getAllCategories()]).then(([foundations,categories])=>{
+            setFoundations(foundations)
+            setCategories(categories)
+        })
     }
     const handleChange = async(e) => {
-        console.log(e.target.value)
         const res = await getFoundationsByCategory(e.target.value)
         setFoundations(res);
    
-    }
-    const getCategories = async () => {
-        const res = await getAllCategories();
-        console.log(res)
-        setCategories(res)
     }
     return (
         <>
