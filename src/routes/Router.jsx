@@ -10,7 +10,7 @@ import SignUp from "../pages/auth/SignUp.jsx";
 import SignIn from "../pages/auth/SignIn.jsx";
 
 import RequestFoundations from '../pages/admin/foundations/RequestFoundations';
-import RequestFoundation from '../pages/client/foundations/RequestFoundation'
+import RequestFoundation from '../pages/client/myfoundation/RequestFoundation'
 
 import Department from '../pages/admin/departments/index.jsx';
 
@@ -26,7 +26,7 @@ import { ClientRoute } from './ClientRoute.jsx';
 import  FoundationsByCategory from '../pages/client/foundations/FoundationsByCategory'
 import FoundationsByDepartament from '../pages/client/foundations/FountdationsByDepartament.jsx';
 import { PublicRoute } from './PublicRoute.jsx';
-import Foundation from '../pages/client/foundations/Foundation.jsx';
+import Foundation from '../pages/client/myfoundation/Foundation.jsx';
 
 function Router(props) {
 

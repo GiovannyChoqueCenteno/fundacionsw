@@ -85,4 +85,16 @@ const getFoundationByUser = async(email)=>{
      return data[0]
 }
 
-export {getAcceptedFoundations , getFoundation , saveFoundation , getFoundationsByCategory, getFoundationsByDepartment ,getFoundationByUser}
+const updateFoundation =async(id)=>{
+        const docRef = doc(firestore, "fundacion", id);
+        await setDoc(docRef,{
+            estado : 1
+        } , {
+            merge : true
+        })
+        
+      
+    
+}
+
+export {getAcceptedFoundations , getFoundation , saveFoundation , getFoundationsByCategory, getFoundationsByDepartment ,getFoundationByUser,updateFoundation}

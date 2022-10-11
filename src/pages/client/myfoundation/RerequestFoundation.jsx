@@ -3,13 +3,14 @@ import React, { useState } from 'react'
 import useForm from '../../../hooks/useForm'
 import { dummyImage } from '../../../utils/constants'
 import { uploadImageProfile } from '../../../services/storage'
-import { saveRequest } from '../../../services/requestFoundation'
+import { getRequestByUser, resetRequest, saveRequest } from '../../../services/requestFoundation'
 import { useEffect } from 'react'
 import { getAllCategories } from '../../../services/categories/categoryDB'
 import { getAllDeparments } from '../../../services/deparments/deparmentDB'
 import useAuth from '../../../hooks/useAuth'
+import { getFoundationByUser } from '../../../services/foundation'
 
-const RequestFountaion = () => {
+const RerequestFountaion = ({foundation}) => {
     const {user} = useAuth();
     const [image, setImage] = useState(dummyImage)
     const [file, setFile] = useState(null)
@@ -26,9 +27,10 @@ const RequestFountaion = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         let url = await uploadImageProfile(file);
-        console.log(form)
-        saveRequest({...form ,correo 
-            : user.email ,urlImagen : url , estado : 1})
+        const requestFoundation=await getRequestByUser(foundation.correo);
+        resetRequest(foundation.id,{...form ,correo 
+            : user.email ,urlImagen : url , estado : 1}
+            ,requestFoundation.id)
     }
     const imageHandler = (event) => {
         if (event.target.files.length > 0) {
@@ -55,7 +57,8 @@ const RequestFountaion = () => {
 
     return (
         <div className='container mx-auto  mt-5'>
-            <h1 className='text-center font-bold text-4xl text-gray-400'>Registrar mi fundacion</h1>
+            <span className='block text-center text-theme-danger'>Su solicitud anterior fue rechazada</span>
+            <h1 className='text-center font-bold text-4xl text-gray-400'>Reenviar formulario</h1>
             <form onSubmit={handleSubmit} className='w-1/2 mx-auto mt-5'>
                 <div className='form-control items-center mb-3'>
                     <label>
@@ -87,6 +90,8 @@ const RequestFountaion = () => {
                     <div className='flex flex-col flex-1'>
                         <label htmlFor="">Seleccionar Departamento</label>
                         <select  value={form.idCategoria} name="idCategoria" id="" onChange={handleChange}>
+                        <option value={0}>Seleccionar Departamento</option>
+
                             {departments.map(department =>(
                                 <option value={department.id}>{department.nombre}</option>
                             ))}
@@ -98,6 +103,7 @@ const RequestFountaion = () => {
 
                         <label htmlFor="">Seleccionar Categoria</label>
                         <select value={form.idDepartamento} onChange={handleChange} name="idDepartamento" id="1">
+                            <option value={0}>Seleccionar Categoria</option>
                             {categories.map(category =>(
                                 <option value={category.id}>{category.nombre}</option>
                             ))}
@@ -112,4 +118,4 @@ const RequestFountaion = () => {
     )
 }
 
-export default RequestFountaion
+export default RerequestFountaion
