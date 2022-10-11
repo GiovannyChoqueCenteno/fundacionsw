@@ -19,7 +19,7 @@ import { ProtectedRoute } from './PrivateRoute.jsx';
 
 import DetailsRequest from '../pages/admin/foundations/DetailsRequest.jsx';
 
-import Bills from '../pages/admin/bills';
+import Bills from '../pages/client/bills';
 import AdminHome from '../pages/admin/index.jsx';
 import { ClientRoute } from './ClientRoute.jsx';
 
@@ -27,6 +27,7 @@ import  FoundationsByCategory from '../pages/client/foundations/FoundationsByCat
 import FoundationsByDepartament from '../pages/client/foundations/FountdationsByDepartament.jsx';
 import { PublicRoute } from './PublicRoute.jsx';
 import Foundation from '../pages/client/myfoundation/Foundation.jsx';
+import DetailsFoundation from '../pages/client/foundations/DetailsFoundation';
 
 function Router(props) {
 
@@ -55,7 +56,7 @@ function Router(props) {
                 />
                 }>
                     <Route path='fundacion' element={<Foundation />} />
-                    <Route path='bills' element={<Bills />} />
+                    <Route path='bills/:id' element={<Bills />} />
                 </Route>
                 <Route path='*' element={
                     <PublicRoute 
@@ -65,6 +66,7 @@ function Router(props) {
                 <Route  path='' element={<Home />} />
                 <Route path='categories' element={<FoundationsByCategory  />}  />
                 <Route path='departments'  element={<FoundationsByDepartament  />}  />
+                <Route path='foundation/:id' element={<DetailsFoundation />} />
                 </Route>
 
                 <Route element={<AuthLayout />}>

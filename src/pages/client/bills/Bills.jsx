@@ -6,16 +6,16 @@ import imageDefault from '../../../assets/image/defaultImage.jpg';
 import { remove } from '../../../utils/messages';
 import { aumentarSaldo, deleteBill, getAllBills, getOneFundacion, restarSaldo, saveBill, updateBill } from '../../../services/bills/billDB';
 import { uploadImageBill } from '../../../services/storage';
+import { useParams } from 'react-router-dom';
 
 const addIcon = <IoAddCircleOutline size={"2em"} color='white' className={"inline-block"} />
 const removeIcon = <IoTrashOutline size={"2em"} color='white' className={"inline-block"} />
 const editIcon = <IoPencilOutline size={"2em"} color='white' className={"inline-block"} />
 
 // get useParams();
-const fundacionId = "Z26sqUdZ8mf9L0WljzPI";
 
 const Bills = () => {
-
+    const {id} = useParams();
     const [bills, setbill] = useState(null);
     const [saldo, setsaldo] = useState(null);
 
@@ -29,8 +29,8 @@ const Bills = () => {
         checkBox.checked = false;
         try {
             let urlImage = await uploadImageBill(file.files[0]);
-            await saveBill({ titulo: titulo.value, descripcion: descripcion.value, costo: costo.value, fundacionId, urlImage });
-            let saldoActualizado = await restarSaldo(fundacionId, costo.value);
+            await saveBill({ titulo: titulo.value, descripcion: descripcion.value, costo: costo.value, fundacionId : id, urlImage });
+            let saldoActualizado = await restarSaldo(id, costo.value);
             setsaldo(saldoActualizado);
         } catch (error) {
             alert("Error al createBill")
@@ -56,7 +56,7 @@ const Bills = () => {
         let urlImage = e.target.children[4].children[1].children[0].src;
         let checkbox = e.target.parentElement.parentElement.parentElement.parentElement.children[1];
         checkbox.checked = false;
-        const data = { titulo, descripcion, fundacionId, urlImage, costo: Number(costo) };
+        const data = { titulo, descripcion, fundacioniId, urlImage, costo: Number(costo) };
         try {
             if (file.files[0] != undefined) {
                 let urlImage = await uploadImageBill(file.files[0]);
@@ -73,7 +73,7 @@ const Bills = () => {
     const removeBill = async (gastoId, monto) => {
         try {
             await deleteBill(gastoId);
-            let saldoActualizado = await aumentarSaldo(fundacionId, monto);
+            let saldoActualizado = await aumentarSaldo(id, monto);
             setsaldo(saldoActualizado);
         } catch (error) {
             alert("Error al removeBill")
@@ -83,7 +83,8 @@ const Bills = () => {
 
     const getBills = async () => {
         try {
-            let data = await getAllBills(fundacionId);
+            let data = await getAllBills(id);
+            console.log(data)
             setbill(data);
         } catch (error) {
             alert("Failed: getBills");
@@ -92,7 +93,7 @@ const Bills = () => {
     }
 
     const getFundacion = async () => {
-        const fundacion = await getOneFundacion(fundacionId);
+        const fundacion = await getOneFundacion(id);
         setsaldo(fundacion.data().saldo);
     }
 

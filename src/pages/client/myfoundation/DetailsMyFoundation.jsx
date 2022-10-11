@@ -4,7 +4,7 @@ import { useEffect , useState } from 'react';
 import { useParams , useNavigate} from 'react-router-dom'
 import { getFoundation } from '../../../services/foundation';
 const DetailsMyFoundation = ({fundacion}) => {
-  
+    const navigate = useNavigate();
     return (
         <div className='container mx-auto  mt-5'>
             <div className='flex flex-col gap-4 items-center'>
@@ -37,8 +37,13 @@ const DetailsMyFoundation = ({fundacion}) => {
                     </div>
                 </div>
                 <a className='link-neutral hover:text-primary' href={fundacion.urlIUbicacion} target="_blank">Ver ubicacion</a>
+          
+                <button onClick={()=>{
+                    navigate(`/client/bills/${fundacion.id}`)
+                }} className='btn btn-primary'>
+                    Ver mis pagos
+                </button>
             </div>
-       
         </div>
     
     )
