@@ -1,8 +1,19 @@
-import { addDoc, collection, doc, getDoc, getDocs, onSnapshot, query, setDoc, deleteDoc } from "firebase/firestore";
+import { addDoc, updateDoc, collection, doc, getDoc, getDocs, onSnapshot, query, setDoc, deleteDoc } from "firebase/firestore";
 import { firestore } from "../../config/firebase.js";
 
 async function savePayment(data) {
+    console.log(data)
     await addDoc(collection(firestore, "payments"), data);
+
+    const fundacionRef = doc(firestore, "fundacion", data.fundacion_id);
+    getDoc(fundacionRef).then(async res => {
+        const saldo = res.data().saldo ?? 0;
+        await updateDoc(fundacionRef, {
+            saldo: saldo + data.amount
+        });
+    }).catch(err=>{
+
+    });
 }
 
 async function updatePayment(id, data) {
