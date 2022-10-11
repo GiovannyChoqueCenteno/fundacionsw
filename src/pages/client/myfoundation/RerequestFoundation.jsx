@@ -8,7 +8,6 @@ import { useEffect } from 'react'
 import { getAllCategories } from '../../../services/categories/categoryDB'
 import { getAllDeparments } from '../../../services/deparments/deparmentDB'
 import useAuth from '../../../hooks/useAuth'
-import { getFoundationByUser } from '../../../services/foundation'
 
 const RerequestFountaion = ({foundation}) => {
     const {user} = useAuth();

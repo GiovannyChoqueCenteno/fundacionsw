@@ -62,12 +62,15 @@ function Router(props) {
                         children={<AppLayout />}
                     />
                 }>
+               
+                <Route path='foundation/:id' element={<DetallesFundacion />} />
+                </Route>
+                <Route>
                 <Route  path='' element={<Home />} />
                 <Route path='categories' element={<FoundationsByCategory  />}  />
                 <Route path='departments'  element={<FoundationsByDepartament  />}  />
-                <Route path='foundation/:id' element={<DetallesFundacion />} />
                 </Route>
-                  
+
                 <Route element={<AuthLayout />}>
                     <Route  path='/signin' element={<SignIn />} />
                     <Route  path='/signup' element={<SignUp />} />
