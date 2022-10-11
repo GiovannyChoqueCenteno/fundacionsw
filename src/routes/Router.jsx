@@ -8,31 +8,69 @@ import AdminLayout from "../components/templates/AdminLayout.jsx";
 import DetallesFundacion from '../pages/client/foundations/DetailsFoundation';
 import SignUp from "../pages/auth/SignUp.jsx";
 import SignIn from "../pages/auth/SignIn.jsx";
-import Department from '../pages/admin/departments/index.jsx';
-import RequestFoundation from '../pages/client/foundations/RequestFoundation';
-import { ProtectedRoute } from './PrivateRoute.jsx';
-import Bills from '../pages/admin/bills';
 
+import RequestFoundations from '../pages/admin/foundations/RequestFoundations';
+import RequestFoundation from '../pages/client/foundations/RequestFoundation'
+
+import Department from '../pages/admin/departments/index.jsx';
+
+
+import { ProtectedRoute } from './PrivateRoute.jsx';
+
+import DetailsRequest from '../pages/admin/foundations/DetailsRequest.jsx';
+
+import Bills from '../pages/admin/bills';
+import AdminHome from '../pages/admin/index.jsx';
+import { ClientRoute } from './ClientRoute.jsx';
+
+import  FoundationsByCategory from '../pages/client/foundations/FoundationsByCategory'
+import FoundationsByDepartament from '../pages/client/foundations/FountdationsByDepartament.jsx';
+import { PublicRoute } from './PublicRoute.jsx';
+import Foundation from '../pages/client/foundations/Foundation.jsx';
 
 function Router(props) {
+
     return (
         <BrowserRouter>
             <Routes>
-                <Route path={'admin'} element={<ProtectedRoute children={<AdminLayout />} />}>
-                    <Route path='applications' element={<Home />} />
-                    <Route path='categories' element={<Categoria />} />
-                    <Route path='departments' element={<Department />} />
-                    <Route path='bills' element={<Bills />} />
-                </Route>
+
                 <Route element={<AppLayout />}>
                     <Route index path='/' element={<Home />} />
-                    <Route path='/fundacion/:id' element={<DetallesFundacion />} />
-                    <Route path="*" element={<Navigate to="/" />} />
-                    <Route path='/fundacion/solicitud' element={<RequestFoundation />} />
                 </Route>
+                <Route path={'admin/*'} element={
+                    <ProtectedRoute
+                        children={<AdminLayout />}
+                    >
+                    </ProtectedRoute>}>
+                    <Route path='' element={<AdminHome />} />
+                    <Route path='applications' element={<Home />} />
+                    <Route path='categories' element={<Categoria />} />
+                    <Route path='solicitudes' element={<RequestFoundations />} />
+                    <Route path='departments' element={<Department />} />
+                    <Route path='solicitud/:id' element={<DetailsRequest />} />
+                </Route>
+                <Route path={'client/*'} element={
+                <ClientRoute
+                    children={<AppLayout />}
+                />
+                }>
+                    <Route path='fundacion' element={<Foundation />} />
+                    <Route path='bills' element={<Bills />} />
+                </Route>
+                <Route path='*' element={
+                    <PublicRoute 
+                        children={<AppLayout />}
+                    />
+                }>
+                <Route  path='' element={<Home />} />
+                <Route path='categories' element={<FoundationsByCategory  />}  />
+                <Route path='departments'  element={<FoundationsByDepartament  />}  />
+                <Route path='foundation/:id' element={<DetallesFundacion />} />
+                </Route>
+                  
                 <Route element={<AuthLayout />}>
-                    <Route index path='/signin' element={<SignIn />} />
-                    <Route index path='/signup' element={<SignUp />} />
+                    <Route  path='/signin' element={<SignIn />} />
+                    <Route  path='/signup' element={<SignUp />} />
                 </Route>
             </Routes>
         </BrowserRouter >

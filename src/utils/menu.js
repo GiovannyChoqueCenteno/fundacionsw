@@ -1,5 +1,4 @@
 import {routes} from "./constants.js";
-
 export const menuOptionsToClient=[
     {
         path:routes.home,
@@ -15,13 +14,13 @@ export const menuOptionsToClient=[
     },
     {
         path:routes.registerFoundation,
-        title:'Registrar fundación'
+        title:'Mi fundación'
     }
 ]
 
 export const menuOptionsToAdmin=[
     {
-        path:routes.adminApplications,
+        path:routes.adminRequests,
         title:'Solicitudes'
     },
     {
