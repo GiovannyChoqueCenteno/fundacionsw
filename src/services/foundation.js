@@ -21,7 +21,10 @@ const getAcceptedFoundations =async ()=>{
 const getFoundation = async(id)=>{
     const docRef = doc(firestore,'fundacion',id)
     const docSnap = await getDoc(docRef);
-    return docSnap.data();
+    return {
+        id:docRef.id,
+        ...docSnap.data()
+    };
 }
 
 const saveFoundation = async(data)=>{
