@@ -9,9 +9,11 @@ export function ClientRoute({ children }) {
   if(!user) {
     return <Navigate to="/signin" />
   }
-  if (user ) {
-    if(user.email === 'admi@admi.com')
-    return <Navigate to="/admin" />
+  if (user) {
+    console.log("Entrando por aqui")
+    if(user.email === 'admi@admi.com'){
+      return <Navigate to="/admin" />
+    }
     return <>{children}</>;    
   };
 }

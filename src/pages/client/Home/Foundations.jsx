@@ -26,10 +26,7 @@ const Fundaciones = () => {
      }
 
     return (
-         foundations.length===0?
-             
-             <img src="./loading.gif" className='text-center' />
-            :
+    
             <ListFoundations  foundations={foundations}/>
     )
 }

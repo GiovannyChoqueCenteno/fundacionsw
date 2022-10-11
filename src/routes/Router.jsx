@@ -25,6 +25,8 @@ import { ClientRoute } from './ClientRoute.jsx';
 
 import  FoundationsByCategory from '../pages/client/foundations/FoundationsByCategory'
 import FoundationsByDepartament from '../pages/client/foundations/FountdationsByDepartament.jsx';
+import { PublicRoute } from './PublicRoute.jsx';
+import Foundation from '../pages/client/foundations/Foundation.jsx';
 
 function Router(props) {
 
@@ -46,17 +48,19 @@ function Router(props) {
                     <Route path='solicitudes' element={<RequestFoundations />} />
                     <Route path='departments' element={<Department />} />
                     <Route path='solicitud/:id' element={<DetailsRequest />} />
-                    <Route path='bills' element={<Bills />} />
                 </Route>
                 <Route path={'client/*'} element={
                 <ClientRoute
                     children={<AppLayout />}
                 />
                 }>
-                    <Route path='fundacion/solicitud' element={<RequestFoundation />} />
+                    <Route path='fundacion' element={<Foundation />} />
+                    <Route path='bills' element={<Bills />} />
                 </Route>
                 <Route path='*' element={
-                    <AppLayout />
+                    <PublicRoute 
+                        children={<AppLayout />}
+                    />
                 }>
                 <Route  path='' element={<Home />} />
                 <Route path='categories' element={<FoundationsByCategory  />}  />

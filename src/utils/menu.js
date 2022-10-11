@@ -14,7 +14,7 @@ export const menuOptionsToClient=[
     },
     {
         path:routes.registerFoundation,
-        title:'Registrar fundación'
+        title:'Mi fundación'
     }
 ]
 
