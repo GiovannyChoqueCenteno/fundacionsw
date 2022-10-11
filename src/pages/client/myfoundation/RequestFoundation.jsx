@@ -9,7 +9,7 @@ import { getAllCategories } from '../../../services/categories/categoryDB'
 import { getAllDeparments } from '../../../services/deparments/deparmentDB'
 import useAuth from '../../../hooks/useAuth'
 
-const RequestFountaion = () => {
+const RerequestFoundation = () => {
     const {user} = useAuth();
     const [image, setImage] = useState(dummyImage)
     const [file, setFile] = useState(null)
@@ -27,9 +27,10 @@ const RequestFountaion = () => {
         e.preventDefault();
         let url = await uploadImageProfile(file);
         console.log(form)
-        saveRequest({...form ,correo 
+        await saveRequest({...form ,correo 
             : user.email ,urlImagen : url , estado : 1})
-    }
+            window.location.reload()
+        }
     const imageHandler = (event) => {
         if (event.target.files.length > 0) {
             const file = event.target.files[0];
@@ -87,6 +88,7 @@ const RequestFountaion = () => {
                     <div className='flex flex-col flex-1'>
                         <label htmlFor="">Seleccionar Departamento</label>
                         <select  value={form.idCategoria} name="idCategoria" id="" onChange={handleChange}>
+                        <option value={0}>Seleccionar Departamento</option>
                             {departments.map(department =>(
                                 <option value={department.id}>{department.nombre}</option>
                             ))}
@@ -98,6 +100,8 @@ const RequestFountaion = () => {
 
                         <label htmlFor="">Seleccionar Categoria</label>
                         <select value={form.idDepartamento} onChange={handleChange} name="idDepartamento" id="1">
+                        <option value={0}>Seleccionar Categoria</option>
+
                             {categories.map(category =>(
                                 <option value={category.id}>{category.nombre}</option>
                             ))}
@@ -112,4 +116,4 @@ const RequestFountaion = () => {
     )
 }
 
-export default RequestFountaion
+export default RerequestFoundation

@@ -2,6 +2,9 @@ import React from 'react'
 import { useEffect , useState } from 'react'
 import useAuth from '../../../hooks/useAuth'
 import { getFoundationByUser } from '../../../services/foundation'
+import DetailsMyFoundation from './DetailsMyFoundation'
+import PendingFoundation from './PendingFoundation'
+import RerequestFoundation from './RerequestFoundation'
 import RequestFountaion from './RequestFoundation'
 
 const Foundation = () => {
@@ -16,24 +19,24 @@ const Foundation = () => {
         setFundacion(res)
     }
     const FoundationComponent = ()=>{
-        return <RequestFountaion />
         if(fundacion) {
             if(fundacion.estado==1){
-                return <h1>Fundacion en Revision</h1> 
+                return <PendingFoundation />
             }
             if(fundacion.estado==2){
-                return <h2>Informacion de fundacion</h2>
+                return <DetailsMyFoundation fundacion={fundacion} />
             }
-            
+            if(fundacion.estado==3){
+                return <RerequestFoundation foundation={fundacion} />
+            }
         }else{
+        return <RequestFountaion  />
            
         }
     }
   return (
-    <div className='container mx-auto  mt-5'>
             <FoundationComponent />
 
-    </div>
   )
 }
 

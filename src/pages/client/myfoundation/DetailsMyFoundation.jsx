@@ -3,23 +3,8 @@ import React from 'react'
 import { useEffect , useState } from 'react';
 import { useParams , useNavigate} from 'react-router-dom'
 import { getFoundation } from '../../../services/foundation';
-import { acceptRequest, getRequest } from '../../../services/requestFoundation';
-import Payment from '../../../components/elements/Payment'
-import Modal from "../../../components/elements/Modal.jsx";
-import PayPage from "../../../components/elements/PayPage.jsx";
-import useAuth from '../../../hooks/useAuth';
-const DetailsFoundation = () => {
-    const data = useParams();
-    const {user} = useAuth(); 
-    const [fundacion, setFundacion] = useState({})
-    useEffect(()=>{ 
-        obtenerFoundation()
-    },[])
-    const obtenerFoundation = async()=>{
-       const res = await getFoundation(data.id);
-       console.log(res)
-        setFundacion(res)
-    }
+const DetailsMyFoundation = ({fundacion}) => {
+    const navigate = useNavigate();
     return (
         <div className='container mx-auto  mt-5'>
             <div className='flex flex-col gap-4 items-center'>
@@ -52,21 +37,17 @@ const DetailsFoundation = () => {
                     </div>
                 </div>
                 <a className='link-neutral hover:text-primary' href={fundacion.urlIUbicacion} target="_blank">Ver ubicacion</a>
-                {
-                    user &&
-                <Modal title={"Realizar donación"} openModalText={"Realizar donación"} modalId={"pay"} btnStyle={"btn-prim"} contentStyle={"my-5"} >
-                    <PayPage fundacion_id={fundacion.id}></PayPage>
-                    {/*<Payment setDonate={setDonate} fundacion_id={fundacion.id}/>*/}
-                </Modal>}
-              {/*  <a className='btn btn-primary'> Realizar Donacion</a>*/}
-
-
+          
+                <button onClick={()=>{
+                    navigate(`/client/bills/${fundacion.id}`)
+                }} className='btn btn-primary'>
+                    Ver mis pagos
+                </button>
             </div>
-       
         </div>
     
     )
             
 }
 
-export default DetailsFoundation
+export default DetailsMyFoundation
