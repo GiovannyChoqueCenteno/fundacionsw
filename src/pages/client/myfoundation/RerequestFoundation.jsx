@@ -27,10 +27,13 @@ const RerequestFountaion = ({foundation}) => {
         e.preventDefault();
         let url = await uploadImageProfile(file);
         const requestFoundation=await getRequestByUser(foundation.correo);
-        resetRequest(foundation.id,{...form ,correo 
+        await resetRequest(foundation.id,{...form ,correo 
             : user.email ,urlImagen : url , estado : 1}
             ,requestFoundation.id)
-    }
+   
+            window.location.reload()
+       
+        }
     const imageHandler = (event) => {
         if (event.target.files.length > 0) {
             const file = event.target.files[0];

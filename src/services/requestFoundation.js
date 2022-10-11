@@ -8,9 +8,7 @@ const saveRequest = async(data)=>{
         await addDoc(collection(firestore, 'solicitud'), {
             ...data ,
             estado : parseInt(data.estado),
-            idDepartamento : parseInt(data.idDepartamento),
-            idCategoria : parseInt(data.idCategoria),
-            telefono : parseInt(data.telefono)
+                telefono : parseInt(data.telefono)
         })
         await saveFoundation(data)
     } catch (error) {
@@ -100,16 +98,12 @@ const resetRequest = async(idFoundation ,data,idRequest)=>{
     await updateDoc(docRef, {
         ...data ,
         estado : parseInt(data.estado),
-        idDepartamento : parseInt(data.idDepartamento),
-        idCategoria : parseInt(data.idCategoria),
         telefono : parseInt(data.telefono)
     })
     const docRef2 = doc(firestore, "fundacion", idFoundation);
     await updateDoc(docRef2,{
         ...data ,
         estado : parseInt(data.estado),
-        idDepartamento : parseInt(data.idDepartamento),
-        idCategoria : parseInt(data.idCategoria),
         telefono : parseInt(data.telefono)
     })
 }

@@ -27,9 +27,10 @@ const RerequestFoundation = () => {
         e.preventDefault();
         let url = await uploadImageProfile(file);
         console.log(form)
-        saveRequest({...form ,correo 
+        await saveRequest({...form ,correo 
             : user.email ,urlImagen : url , estado : 1})
-    }
+            window.location.reload()
+        }
     const imageHandler = (event) => {
         if (event.target.files.length > 0) {
             const file = event.target.files[0];
