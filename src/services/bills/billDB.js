@@ -30,7 +30,7 @@ async function restarSaldo(fundacionId, monto) {
 async function aumentarSaldo(fundacionId, monto) {
     let fundacion = await getDoc(doc(firestore, "fundacion", fundacionId));
     let data = fundacion.data();
-    let saldoFinal = Number(data.saldo) +  Number(monto);
+    let saldoFinal = Number(data.saldo) + Number(monto);
     const updateFundacion = {
         ...data,
         saldo: saldoFinal
@@ -53,6 +53,26 @@ async function getAllBills(fundacionId) {
     return list;
 }
 
+async function getAllBillsAndTotal(fundacionId) {
+    const q = query(collection(firestore, "gasto"), where("fundacionId", "==", fundacionId));
+    const querySnapshot = await getDocs(q);
+    let list = [];
+    let gastoTotal = 0;
+    querySnapshot.forEach((currentDoc) => {
+        let document = {
+            id: currentDoc.id,
+            ...currentDoc.data()
+        }
+        gastoTotal = gastoTotal + Number(document.costo);
+        list.push(document);
+    });
+    return {
+        data: list,
+        gastoTotal
+    };
+}
+
+
 async function getOneFundacion(fundacionId) {
     return await getDoc(doc(firestore, "fundacion", fundacionId));
 }
@@ -64,5 +84,6 @@ export {
     getAllBills,
     restarSaldo,
     aumentarSaldo,
-    getOneFundacion
+    getOneFundacion,
+    getAllBillsAndTotal
 }

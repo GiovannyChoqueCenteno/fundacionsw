@@ -28,6 +28,7 @@ import FoundationsByDepartament from '../pages/client/foundations/FountdationsBy
 import { PublicRoute } from './PublicRoute.jsx';
 import Foundation from '../pages/client/myfoundation/Foundation.jsx';
 import DetailsFoundation from '../pages/client/foundations/DetailsFoundation';
+import FoundationBill from '../pages/client/foundations/FoundationBill.jsx';
 
 function Router(props) {
 
@@ -67,6 +68,8 @@ function Router(props) {
                 <Route path='categories' element={<FoundationsByCategory  />}  />
                 <Route path='departments'  element={<FoundationsByDepartament  />}  />
                 <Route path='foundation/:id' element={<DetailsFoundation />} />
+                <Route path='foundation/bill/:foundationId' element={<FoundationBill />} />
+                
                 </Route>
 
                 <Route element={<AuthLayout />}>

@@ -64,7 +64,7 @@ const DetailsRequest = () => {
                 </div>
             </div>
 
-            <a className='link-neutral hover:text-primary' href={request.urlIUbicacion} target="_blank">Ver ubicacion</a>
+            <a className=' cursor-pointer link-neutral hover:text-primary' href={request.direccion} target="_blank">Ver ubicacion</a>
             <div className='flex justify-between w-1/4'>
                 <div>
                 <a className='btn btn-primary' onClick={acceptFoundation}>Aceptar Solicitud</a>
