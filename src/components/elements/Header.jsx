@@ -9,7 +9,7 @@ function Header({ menuItems, authAction }) {
         <header className={'bg-white h-16 flex items-center p-5'}>
             <h1 className={'flex-none text-3xl text-theme-primary font-bold hover:cursor-pointer'}
                 onClick={() => {
-                    navigate('/admin/solicitudes')
+                    navigate('/')
                 }}
             >{'Fundaciones'}</h1>
             <div className="grow">

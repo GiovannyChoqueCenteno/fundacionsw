@@ -157,7 +157,7 @@ const Bills = () => {
                     </form>
                 </ModalLabel>
 
-                <h5 className='my-2 text-end'>Saldo : {saldo} bs</h5>
+                <h5 className='my-2 text-end'>Saldo : {saldo} $</h5>
 
                 <table className="table table-zebra w-full text-center">
                     <thead>
