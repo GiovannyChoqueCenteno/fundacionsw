@@ -31,9 +31,9 @@ function SignIn(props) {
         var userObject = jwt_decode(response.credential)
         console.log(userObject)
         sessionStorage.setItem("auth", JSON.stringify({
-            "tokenJWT":response.credential,
-            "userData":userObject,
-            "authType":"Google",
+            "tokenJWT": response.credential,
+            "userData": userObject,
+            "authType": "Google",
         }));
         userObject != null ? navigate(routes.home) : navigate(routes.signIn);
     }
@@ -46,6 +46,8 @@ function SignIn(props) {
         event.preventDefault();
 
         signIn(email, password).then(response => {
+            if (email == "admi@admi.com")
+                return navigate('/admin/solicitudes');
             navigate('/');
         }).catch(err => {
             setErrorMessage(ops);
