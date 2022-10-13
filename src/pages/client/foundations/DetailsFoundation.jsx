@@ -51,12 +51,16 @@ const DetailsFoundation = () => {
                         {fundacion.telefono}
                     </div>
                 </div>
-                <a className='cursor-pointer btn-prim p-2 link-neutral hover:text-primary'
-                    href={fundacion.direccion} target="_blank">Ver ubicacion</a>
-                <Link to={`/foundation/bill/${fundacion.id}`} className={"btn-prim p-2"}>Ver gastos</Link>
+               <div className='flex justify-between w-1/4'>
+                <a className='cursor-pointer  btn btn-prim'
+                    href={fundacion.direccion} target="_blank">Ver estadisticas</a>
+                
+                <Link to={`/foundation/bill/${fundacion.id}`} className={"btn btn-primary"}>Ver gastos</Link>
+                </div>
+
                 {
                     user &&
-                    <Modal title={"Realizar donación"} openModalText={"Realizar donación"} modalId={"pay"} btnStyle={"btn-prim"} contentStyle={"my-5"} >
+                    <Modal title={"Realizar donación"} openModalText={"Realizar donación"} modalId={"pay"} btnStyle={"btn btn-secondary"} contentStyle={"my-5"} >
                         <PayPage fundacion_id={fundacion.id}></PayPage>
                         {/*<Payment setDonate={setDonate} fundacion_id={fundacion.id}/>*/}
                     </Modal>}

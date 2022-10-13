@@ -9,10 +9,13 @@ import {
     CategoryScale,
     LinearScale,
     BarElement,
+    ArcElement,
+    Tooltip,
+    Legend,
 } from 'chart.js';
-import { Bar } from 'react-chartjs-2';
+import { Bar  ,Doughnut  } from 'react-chartjs-2';
 
-ChartJS.register(CategoryScale, LinearScale, BarElement);
+ChartJS.register(ArcElement,Tooltip,Legend ,CategoryScale, LinearScale, BarElement);
 
 const FoundationBill = () => {
 
@@ -71,7 +74,7 @@ const FoundationBill = () => {
                                             SALDO: {foundation.saldo} $
                                         </h1>
                                         <Bar data={{
-                                            labels: [`Donaciones:${foundation.saldo + gastoTotal} $`, `gasto:${gastoTotal} $`],
+                                            labels: [`Donaciones:${foundation.saldo + gastoTotal} $`, `Gastos:${gastoTotal} $`],
                                             datasets: [
                                                 {
                                                     data: [foundation.saldo + gastoTotal, gastoTotal],
@@ -79,6 +82,22 @@ const FoundationBill = () => {
                                                 }
                                             ],
                                         }} />
+                                      
+                                        <Doughnut 
+                                        className='pt-5'
+                                        data={{
+                                            labels: [`Donaciones:`, `Gastos:`],
+                                            datasets: [
+                                                {
+                                                    label: 'Datos estadisticos',
+                                                    data: [foundation.saldo + gastoTotal, gastoTotal],
+                                                    backgroundColor: ['#525c8b', '#ff5b5b'],
+                                                    borderWidth: 1,
+                                                }
+                                            ],
+                                        }
+                                    }
+                                        />
                                     </div>
                                 </div>
 
