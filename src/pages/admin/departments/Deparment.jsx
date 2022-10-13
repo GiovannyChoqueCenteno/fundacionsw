@@ -4,6 +4,12 @@ import Modal from '../../../components/elements/Modal'
 import { remove } from '../../../utils/messages'
 import { getAllDeparments, saveDeparment, deleteDeparment, updateDeparment } from '../../../services/deparments/deparmentDB'
 import { useEffect } from 'react'
+import { IoTrashOutline, IoAddCircleOutline, IoPencilOutline } from 'react-icons/io5';
+import ModalLabel from '../../../components/elements/ModalLabel'
+
+const addIcon = <IoAddCircleOutline size={"2em"} color='white' className={"inline-block"} />
+const removeIcon = <IoTrashOutline size={"2em"} color='white' className={"inline-block"} />
+const editIcon = <IoPencilOutline size={"2em"} color='white' className={"inline-block"} />
 
 const initialState = {
     nombre: "",
@@ -27,7 +33,6 @@ const Department = () => {
     const handleInputChange = ({ target: { name, value } }) =>
         SetDeparment({ ...deparment, [name]: value })
     const handleSubmit = async (e) => {
-        e.preventDefault();
         await saveDeparment(deparment)
         await getDepartments()
     }
@@ -49,10 +54,10 @@ const Department = () => {
     }
 
     return (
-        <div className={'grow justify-center items-start pt-5 m-8'}>
-            <div className="overflow-x-auto">
-                <Modal title={"Crear"} openModalText={"Agregar"} modalId={"modalAdd"} btnStyle={"btn-prim"} contentStyle={"my-5"} >
-                    <form className='my-5' onSubmit={handleSubmit}>
+        <div className={'grow flex justify-center items-start pt-5 m-8'}>
+            <div className="w-1/2">
+                <ModalLabel title={"Crear"} openModalText={addIcon} modalId={"modalAddLabel1"} btnStyle={"btn-prim"} contentStyle={"my-5"} >
+                    <div className='my-5' onSubmit={handleSubmit}>
                         <div>
                             <label>Nombre</label>
                             <input type="text"
@@ -63,12 +68,12 @@ const Department = () => {
                             />
                         </div>
                         <div className='mt-4'>
-                            <button type='submit' className='btn-custom btn-prim no-underline'>
-                                crear
-                            </button>
+                            <label htmlFor={"#modalAddLabel1"} onClick={handleSubmit} className='btn-custom btn-prim no-underline cursor-pointer'>
+                                Crear
+                            </label>
                         </div>
-                    </form>
-                </Modal>
+                    </div>
+                </ModalLabel>
                 <table className="table  w-full table-zebra text-center">
                     <thead>
                         <tr>
@@ -78,13 +83,13 @@ const Department = () => {
                     </thead>
                     <tbody>
                         {
-                            DeparmentList.map((categoria) => (
-                                <tr key={categoria.id.toString()}>
-                                    <td>{categoria.nombre}</td>
+                            DeparmentList.map((department) => (
+                                <tr key={department.id.toString()}>
+                                    <td>{department.nombre}</td>
                                     <td>
                                         <div className='grid inline-grid grid-cols-2'>
-                                            <Modal title={"Editar"} openModalText={"Editar"} modalId={`ModalEdit/${categoria.id}`} btnStyle={"btn-prim"}>
-                                                <form className='my-5'>
+                                            <ModalLabel title={"Editar"} openModalText={editIcon} modalId={`modalEdit/${department.id}`} btnStyle={"btn-prim"}>
+                                                <div className='my-5'>
                                                     <div>
                                                         <label>Nombre</label>
                                                         <input
@@ -96,27 +101,27 @@ const Department = () => {
                                                         />
                                                     </div>
                                                     <div className='mt-4'>
-                                                        <button type='button' onClick={() => handleUpdate(categoria.id)} className='btn-custom btn-prim no-underline'>
-                                                            actualizar
-                                                        </button>
+                                                        <label htmlFor={`#modalEdit/${department.id}`} onClick={() => handleUpdate(department.id)} className='btn-custom btn-prim no-underline cursor-pointer'>
+                                                            Editar
+                                                        </label>
                                                     </div>
-                                                </form>
-                                            </Modal>
-                                            <Modal title={"Eliminar"} openModalText={"Eliminar"} modalId={`ModalDelete/${categoria.id}`} btnStyle={"btn-dang"}>
+                                                </div>
+                                            </ModalLabel>
+                                            <ModalLabel title={"Eliminar"} openModalText={removeIcon} modalId={`ModalDelete/${department.id}`} btnStyle={"btn-dang"}>
                                                 <div className='mt-4'>
                                                     <div className={"my-4"}>
                                                         <h3>{remove}</h3>
                                                     </div>
                                                     <div>
-                                                        <button onClick={() => handleDelete(categoria.id)} className='btn-custom btn-prim no-underline'>
-                                                            confirmar
+                                                        <button onClick={() => handleDelete(department.id)} className='btn-custom btn-prim no-underline'>
+                                                            Confirmar
                                                         </button>
                                                         <a href="#" className='btn-custom btn-dang no-underline ml-2'>
-                                                            cerrar
+                                                            Cerrar
                                                         </a>
                                                     </div>
                                                 </div>
-                                            </Modal>
+                                            </ModalLabel>
                                         </div>
 
                                     </td>
