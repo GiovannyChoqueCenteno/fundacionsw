@@ -65,7 +65,7 @@ const Categoria = () => {
       <div className='w-1/2'>
 
         <ModalLabel title={"Crear"} openModalText={addIcon} modalId={"modalAddLabel"} btnStyle={"btn-prim"} contentStyle={"my-3"}>
-          <form className='my-5'>
+          <div className='my-5' >
             <div>
               <label>Nombre</label>
               <input
@@ -79,10 +79,10 @@ const Categoria = () => {
             </div>
             <div className='mt-4'>
               <label htmlFor={"#modalAddLabel"} onClick={AddCategorie} className='btn-custom btn-prim no-underline cursor-pointer'>
-                crear
+                Crear
               </label>
             </div>
-          </form>
+          </div>
         </ModalLabel>
 
         <table className="table table-zebra w-full text-center">
@@ -111,7 +111,7 @@ const Categoria = () => {
                       <td className={"flex space-x-2 justify-center"}>
 
                         <ModalLabel title={"Editar"} openModalText={editIcon} modalId={`modalEdit/${categoria.id}`} btnStyle={"btn-prim"}>
-                          <form className='my-5'>
+                          <div className='my-5'>
                             <div>
                               <label>Nombre</label>
                               <input
@@ -125,10 +125,10 @@ const Categoria = () => {
                             </div>
                             <div className='mt-4'>
                               <label htmlFor={`#modalEdit/${categoria.id}`} onClick={() => EditCategorie(categoria.id)} className='btn-custom btn-prim no-underline cursor-pointer'>
-                                editar
+                                Editar
                               </label>
                             </div>
-                          </form>
+                          </div>
                         </ModalLabel>
 
                         <ModalLabel title={"Eliminar"} openModalText={removeIcon} modalId={`modalDelete/${categoria.id}`} btnStyle={"btn-dang"}>
@@ -138,10 +138,10 @@ const Categoria = () => {
                             </div>
                             <div>
                               <label htmlFor={`#modalDelete/${categoria.id}`} onClick={() => DeleteCategorie(categoria.id)} className='btn-custom btn-prim no-underline cursor-pointer'>
-                                confirmar
+                                Confirmar
                               </label>
                               <label htmlFor={`#modalDelete/${categoria.id}`} className='btn-custom btn-prim no-underline cursor-pointer'>
-                                cerrar
+                                Cerrar
                               </label>
                             </div>
                           </div>

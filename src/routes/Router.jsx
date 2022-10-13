@@ -27,6 +27,7 @@ import { PublicRoute } from './PublicRoute.jsx';
 import Foundation from '../pages/client/myfoundation/Foundation.jsx';
 import DetailsFoundation from '../pages/client/foundations/DetailsFoundation';
 import FoundationBill from '../pages/client/foundations/FoundationBill.jsx';
+import Payments from '../pages/client/payments/Payments.jsx';
 
 function Router(props) {
 
@@ -56,6 +57,8 @@ function Router(props) {
                 }>
                     <Route path='fundacion' element={<Foundation />} />
                     <Route path='bills/:id' element={<Bills />} />
+                    <Route path='payments/:id' element={<Payments />} />
+
                 </Route>
                 <Route path='*' element={
                     <PublicRoute 

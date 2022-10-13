@@ -1,4 +1,4 @@
-import { addDoc, updateDoc, collection, doc, getDoc, getDocs, onSnapshot, query, setDoc, deleteDoc } from "firebase/firestore";
+import { addDoc, updateDoc, collection, doc, getDoc, getDocs, onSnapshot, query, setDoc, deleteDoc ,where } from "firebase/firestore";
 import { firestore } from "../../config/firebase.js";
 
 async function savePayment(data) {
@@ -67,12 +67,29 @@ async function listenAllPayments(setPayments) {
     });
 }
 
-
+async function getAllPaymentsByFoundation(idFundacion){
+    const docsRef =collection(firestore, "payments");
+    const q = query(docsRef,where('fundacion_id','==',idFundacion))
+    const docsSnap = await getDocs(q)
+    const data=[]
+    if(docsSnap.docs.length > 0) {
+        docsSnap.forEach(doc => {
+           console.log(doc.data());
+           console.log(doc.id);
+            data.push({
+                ...doc.data(),
+                id :doc.id
+            })
+        })
+     }
+     return data;
+}
 export {
     savePayment,
     updatePayment,
     getPayment,
     getAllPayments,
     listenAllPayments,
-    deletePayment
+    deletePayment,
+    getAllPaymentsByFoundation
 }

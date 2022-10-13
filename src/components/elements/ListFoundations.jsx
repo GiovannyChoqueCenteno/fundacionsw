@@ -11,6 +11,7 @@ const ListFoundations = ({foundations}) => {
     navigate(`/foundation/${id_fundacion}`)
 }
   useEffect(()=>{
+    setLoading(true)
     if (foundations.length>0)
     setLoading(false)
   },[foundations])

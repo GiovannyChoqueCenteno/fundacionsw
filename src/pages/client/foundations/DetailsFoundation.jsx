@@ -53,9 +53,9 @@ const DetailsFoundation = () => {
                 </div>
                <div className='flex justify-between w-1/4'>
                 <a className='cursor-pointer  btn btn-prim'
-                    href={fundacion.direccion} target="_blank">Ver estadisticas</a>
+                    href={fundacion.direccion} target="_blank">Ver direccion</a>
                 
-                <Link to={`/foundation/bill/${fundacion.id}`} className={"btn btn-primary"}>Ver gastos</Link>
+                <Link to={`/foundation/bill/${fundacion.id}`} className={"btn btn-primary"}>Ver estadisticas</Link>
                 </div>
 
                 {

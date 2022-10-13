@@ -8,7 +8,6 @@ const FoundationsByCategory = () => {
         const [foundations, setFoundations] = useState([])
     const [categories, setCategories] = useState([])
 
-
     useEffect(() => {
         getData()
     }, [])
@@ -22,12 +21,12 @@ const FoundationsByCategory = () => {
     const handleChange = async(e) => {
         const res = await getFoundationsByCategory(e.target.value)
         setFoundations(res);
-   
+        
     }
     return (
-        <>
-            <div>
-                <select className='' name="" id="" onChange={handleChange} >
+        <div className='flex '>
+            <div className='ml-5'>
+                <select className='select' name="" id="" onChange={handleChange} >
                     <option value="">Seleccionar Categoria</option>
                     {categories.map(category =>(
                         <option key={category.id} value={category.id}>{category.nombre}</option>
@@ -40,7 +39,7 @@ const FoundationsByCategory = () => {
                     <ListFoundations foundations={foundations} />
                 </div>
             </div>
-        </>
+        </div>
 
     )
 }

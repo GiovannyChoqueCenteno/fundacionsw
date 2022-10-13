@@ -30,9 +30,9 @@ const FoundationsByCategory = () => {
    
     }
     return (
-        <>
-            <div>
-                <select className='' name="" id="" onChange={handleChange} >
+        <div className='flex'>
+            <div className='ml-5'>
+                <select className='select' name="" id="" onChange={handleChange} >
                     <option value="">Seleccionar Departamento</option>
                     {departments.map(department =>(
                         <option key={department.id} value={department.id}>{department.nombre}</option>
@@ -45,7 +45,7 @@ const FoundationsByCategory = () => {
                     <ListFoundations foundations={foundations} />
                 </div>
             </div>
-        </>
+        </div>
 
     )
 }
