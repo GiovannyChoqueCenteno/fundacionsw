@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { IoAddCircleOutline, IoPencilOutline, IoTrashOutline } from 'react-icons/io5'
+import { AiFillFilePdf } from 'react-icons/ai'
+import { jsPDF } from 'jspdf'
+import { useParams } from 'react-router-dom';
+
 import ModalLabel from '../../../components/elements/ModalLabel'
 
 import imageDefault from '../../../assets/image/defaultImage.jpg';
 import { remove } from '../../../utils/messages';
 import { aumentarSaldo, deleteBill, getAllBills, getOneFundacion, restarSaldo, saveBill, updateBill } from '../../../services/bills/billDB';
 import { uploadImageBill } from '../../../services/storage';
-import { useParams } from 'react-router-dom';
 
 const addIcon = <IoAddCircleOutline size={"2em"} color='white' className={"inline-block"} />
 const removeIcon = <IoTrashOutline size={"2em"} color='white' className={"inline-block"} />
@@ -15,10 +18,25 @@ const editIcon = <IoPencilOutline size={"2em"} color='white' className={"inline-
 // get useParams();
 
 const Bills = () => {
-    const {id} = useParams();
-    const [bills, setbill] = useState(null);
+    const { id } = useParams();
+    const [bills, setbill] = useState([]);
     const [saldo, setsaldo] = useState(null);
+    const pdfRef = useRef(null);
+    const handleDownload = () => {
+        const content = pdfRef.current;
 
+        const doc = new jsPDF({
+            format: "a4",
+            unit: "px"
+        });
+        doc.html(content, {
+            callback: function (doc) {
+                doc.save('gastos.pdf');
+            },
+            html2canvas: { scale: 0.5 } // change the scale to whatever number you need
+        });
+
+    };
     const createBill = async (e) => {
         e.preventDefault();
         let titulo = e.target.children[0].children[1];
@@ -29,7 +47,7 @@ const Bills = () => {
         checkBox.checked = false;
         try {
             let urlImage = await uploadImageBill(file.files[0]);
-            await saveBill({ titulo: titulo.value, descripcion: descripcion.value, costo: costo.value, fundacionId : id, urlImage });
+            await saveBill({ titulo: titulo.value, descripcion: descripcion.value, costo: costo.value, fundacionId: id, urlImage });
             let saldoActualizado = await restarSaldo(id, costo.value);
             setsaldo(saldoActualizado);
         } catch (error) {
@@ -103,61 +121,66 @@ const Bills = () => {
     }, []);
 
     return (
+        <>
         <div className={'grow flex justify-center items-start pt-5'}>
             <div className='w-1/2'>
-                <ModalLabel title={"Crear"} openModalText={addIcon} modalId={"modalCreateBill"} btnStyle={"btn-prim"} contentStyle={"my-1"}>
-                    <form onSubmit={createBill} className='my-5' encType="multipart/form-data">
-                        <div>
-                            <label>Titulo</label>
-                            <input
-                                type="text"
-                                minLength={3}
-                                required
-                                className="input input-bordered w-full block"
-                                placeholder={"Titulo..."}
-                            />
-                        </div>
-                        <div>
-                            <label>Descripcion</label>
-                            <textarea
-                                required
-                                minLength={10}
-                                className="text-decoration-none textarea textarea-bordered resize-none block my-1 w-full"
-                                rows={3}
-                                placeholder={"Descripcion..."}
-                            ></textarea>
-                        </div>
-                        <div>
-                            <label>Costo</label>
-                            <input
-                                required
-                                type="number"
-                                min={0}
-                                className="input input-bordered w-full block"
-                                placeholder={"Costo..."}
-                            />
-                        </div>
-                        <div>
-                            <label>Imagen</label>
-                            <div className={"h-40"} >
-                                <img src={imageDefault} className={"h-full rounded-md object-cover"} alt={"imageUpload"} />
+            
+                <div className='flex flex-row gap-4'>
+                    <ModalLabel title={"Crear"} openModalText={addIcon} modalId={"modalCreateBill"} btnStyle={"btn-prim"} contentStyle={"my-1"}>
+                        <form onSubmit={createBill} className='my-5' encType="multipart/form-data">
+                            <div >
+                                <label>Titulo</label>
+                                <input
+                                    type="text"
+                                    minLength={3}
+                                    required
+                                    className="input input-bordered w-full block"
+                                    placeholder={"Titulo..."}
+                                />
                             </div>
-                            <input
-                                type={"file"}
-                                required
-                                accept="image/*"
-                                className={"input input-bordered w-full block my-1"}
-                            />
-                        </div>
-                        <div className='mt-4'>
-                            <button type={"submit"} className={"btn-prim"}>
-                                crear
-                            </button>
-                        </div>
-                    </form>
-                </ModalLabel>
+                            <div>
+                                <label>Descripcion</label>
+                                <textarea
+                                    required
+                                    minLength={10}
+                                    className="text-decoration-none textarea textarea-bordered resize-none block my-1 w-full"
+                                    rows={3}
+                                    placeholder={"Descripcion..."}
+                                ></textarea>
+                            </div>
+                            <div>
+                                <label>Costo</label>
+                                <input
+                                    required
+                                    type="number"
+                                    min={0}
+                                    className="input input-bordered w-full block"
+                                    placeholder={"Costo..."}
+                                />
+                            </div>
+                            <div>
+                                <label>Imagen</label>
+                                <div className={"h-40"} >
+                                    <img src={imageDefault} className={"h-full rounded-md object-cover"} alt={"imageUpload"} />
+                                </div>
+                                <input
+                                    type={"file"}
+                                    required
+                                    accept="image/*"
+                                    className={"input input-bordered w-full block my-1"}
+                                />
+                            </div>
+                            <div className='mt-4'>
+                                <button type={"submit"} className={"btn-prim"}>
+                                    crear
+                                </button>
+                            </div>
+                        </form>
+                    </ModalLabel>
+                    <button onClick={handleDownload} className='btn btn-secondary'>{<AiFillFilePdf />} </button>
 
-                <h5 className='my-2 text-end'>Saldo : {saldo} $</h5>
+                </div>
+                <h5 className='my-2 text-end'>Saldo : {saldo} bs</h5>
 
                 <table className="table table-zebra w-full text-center">
                     <thead>
@@ -259,9 +282,42 @@ const Bills = () => {
                     </tbody>
 
                 </table>
+                {
+                }
             </div>
         </div>
-
+        <ModalLabel>
+                    
+                    <div className='w-screen' ref={pdfRef}  >
+                     
+                         <h1 class='text-4xl text-center text-gray-600 mb-6 mt-4'>Lista de gastos</h1>
+                         <div class='w-2/3 mx-auto'>
+                             <table class="table w-full text-center">
+                                 <thead class='border'>
+                                     <tr>
+                                         <th >titulo</th>
+                                         <th >costo</th>
+                                     </tr>
+                                 </thead>
+     
+                                 <tbody>
+     
+                                     {bills.map((bill) => (
+                                         <tr key={bill.id}>
+                                             <td>{bill.titulo}</td>
+                                             <td>{bill.costo}</td>
+     
+                                         </tr>
+                                     ))}
+        
+     
+                                 </tbody>
+     
+                             </table>
+                         </div>
+                     </div>
+                     </ModalLabel> 
+                     </>
     )
 }
 

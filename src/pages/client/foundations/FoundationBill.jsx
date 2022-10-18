@@ -81,7 +81,8 @@ const FoundationBill = () => {
                                                     backgroundColor: ['#525c8b', '#ff5b5b'],
                                                 }
                                             ],
-                                        }} />
+                                            
+                                        } } />
                                       
                                         <Doughnut 
                                         className='pt-5'
